@@ -8,7 +8,6 @@ from models.act_model import Act
 from models.users_acts_model import users_acts_join
 
 
-
 class User(db.Model, BaseModel):
 
     __tablename__ = 'users'
