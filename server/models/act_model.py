@@ -13,3 +13,7 @@ class Act(db.Model, BaseModel):
     official_website = db.Column(db.Text, nullable=False)
     genre = db.Column(db.String(40), nullable=False)
     bio = db.Column(db.Text, nullable=False)
+    
+    #relationship 1 act to many orders
+    orders = db.relationship("Order", backref="act", cascade="all, delete")
+    
