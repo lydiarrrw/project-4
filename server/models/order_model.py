@@ -8,4 +8,4 @@ class Order(db.Model, BaseModel):
 user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"))
 #many orders to one act
 act_id = db.Column(db.Integer, db.ForeignKey("acts.id", ondelete="CASCADE"))
-ready_to_collect = db.Column(db.Boolean, nullable =False)
+ready_to_collect = db.Column(db.Boolean, nullable=False)
