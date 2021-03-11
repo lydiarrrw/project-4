@@ -1,5 +1,7 @@
 from app import db
-from models.base import BaseModel
+from models.base_model import BaseModel
+from models.order_model import Order
+from models.reaction_model import Reaction
 
 
 class Act(db.Model, BaseModel):
@@ -16,4 +18,7 @@ class Act(db.Model, BaseModel):
     
     #relationship 1 act to many orders
     orders = db.relationship("Order", backref="act", cascade="all, delete")
+
+    #relationship 1 act to many reactions
+    reactions = db.relationship("Reaction", backref="act", cascade="all, delete")
     

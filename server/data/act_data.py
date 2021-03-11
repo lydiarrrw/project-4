@@ -1,3 +1,5 @@
+from models.act_model import Act
+
 act_list= [
     Act(stage_name="Fairground Stage", set_time="19:00", artist_name="Taylor Swift", image="https://www.rollingstone.com/wp-content/uploads/2019/12/TaylorSwiftTimIngham.jpg", official_website="https://www.taylorswift.com/", genre="pop", bio="Her narrative songwriting, which often takes inspiration from her personal life, has received widespread critical praise and media coverage."),
     Act(stage_name="Fairground Stage", set_time="18:00", artist_name="Dua Lipa", image="https://www.nme.com/wp-content/uploads/2019/01/dua-lipa-GettyImages-1085074344.jpg", official_website="https://www.dualipa.com/", genre="pop", bio="An English singer and songwriter. After working as a model, she signed with Warner Bros. Records in 2014 and released her eponymous debut album in 2017."),

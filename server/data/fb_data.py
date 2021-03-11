@@ -1,3 +1,5 @@
+from models.product_model import Product
+
 fb_list = [
     Product(product_name="Heineken", product_type="beverage", in_stock=True, price=6.50),
     Product(product_name="Carlsberg", product_type="beverage", in_stock=True, price=6.50),
