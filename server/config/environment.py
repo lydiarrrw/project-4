@@ -1,0 +1,2 @@
+db_URI = 'postgres://localhost:5432/dreamland_db'
+secret = 'This is a super cool really long secret banana truck japan tree fairy baking bottle picture paper headphone toy wood lamp phone natural plant'
