@@ -1,4 +1,4 @@
-# from flask import Blueprint, request
+from flask import Blueprint, request
 # from models.reaction_model import Reaction
 # from serializers.reaction_serial import ReactionSchema
 # from models.act_model import Act
@@ -9,7 +9,7 @@
 # reaction_schema = ReactionSchema()
 # act_schema = ActSchema()
 
-# router = Blueprint(__name__, "reactions")
+router = Blueprint(__name__, "reactions")
 
 # # -----GET ACT REACTIONS------
 

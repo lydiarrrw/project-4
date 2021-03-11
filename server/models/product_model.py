@@ -1,5 +1,5 @@
 from app import db
-from models.base import BaseModel
+from models.base_model import BaseModel
 
 class Product(db.Model, BaseModel):
     __tablename__ = "products"
