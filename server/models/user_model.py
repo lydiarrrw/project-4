@@ -6,6 +6,7 @@ from config.environment import secret
 from models.base_model import BaseModel
 from models.act_model import Act
 from models.users_acts_model import users_acts_join
+from sqlalchemy.orm import validates
 
 
 
@@ -50,3 +51,9 @@ class User(db.Model, BaseModel):
         }
         token = jwt.encode(payload, secret, 'HS256')
         return token
+
+    
+    @validates('email')
+    def validate_email(self, key, address):
+        assert '@' in address
+        return address

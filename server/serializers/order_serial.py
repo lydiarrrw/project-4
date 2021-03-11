@@ -9,3 +9,5 @@ class OrderSchema(ma.SQLAlchemyAutoSchema):
 
 # nest products inside of order??
 products = fields.Nested("ProductSchema", many=True)
+act = fields.Nested("ActSchema")
+user = fields.Nested("UserSchema")
