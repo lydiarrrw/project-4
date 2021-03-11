@@ -11,4 +11,6 @@ class Act(db.Model, BaseModel):
     image = db.Column(db.Text, nullable=False)
     official_website = db.Column(db.Text, nullable=False)
     bio = db.Column(db.Text, nullable=False)
-
+    #relationship 1 act to many orders
+    orders = db.relationship("Order", backref="act", cascade="all, delete")
+    
