@@ -36,6 +36,14 @@ class User(db.Model, BaseModel):
     def password(self, password_plain_text):
         self.password_hash = bcrypt.generate_password_hash(password_plain_text).decode('utf-8')
 
+    @hybrid_property
+    def password_confirmation(self):
+        pass
+
+    @password_confirmation.setter
+    def password_confirmation(self, plaintext):
+        return plaintext
+
 
     def validate_password(self,password_plain_text):
         return bcrypt.check_password_hash(self.password_hash, password_plain_text)
@@ -49,15 +57,7 @@ class User(db.Model, BaseModel):
         }
         token = jwt.encode(payload, secret, 'HS256')
         return token
-
-
-    @hybrid_property
-    def password_confirmation(self):
-        pass
-
-    @password_confirmation.setter
-    def password_confirmation(self, plaintext):
-        return plaintext
+   
     
     @validates('email')
     def validate_email(self, key, address):
