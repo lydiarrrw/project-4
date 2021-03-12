@@ -17,12 +17,11 @@ class User(db.Model, BaseModel):
     email = db.Column(db.Text, nullable = False, unique = True)
     is_admin = db.Column(db.Boolean, nullable = False)
     password_hash = db.Column(db.String(128), nullable = True)
-    password_confirmation = db.Column(db.String(128), nullable = True)
 
-    #relationship many users to many acts
+    # relationship many users to many acts
     acts = db.relationship('Act', backref = 'users', secondary = users_acts_join)
 
-    #relationship 1 user to many reactions
+    # relationship 1 user to many reactions
     reactions = db.relationship('Reaction', backref = 'user', cascade = 'all, delete')
 
     #relationship 1 user to many orders
@@ -51,6 +50,14 @@ class User(db.Model, BaseModel):
         token = jwt.encode(payload, secret, 'HS256')
         return token
 
+
+    @hybrid_property
+    def password_confirmation(self):
+        pass
+
+    @password_confirmation.setter
+    def password_confirmation(self, plaintext):
+        return plaintext
     
     @validates('email')
     def validate_email(self, key, address):

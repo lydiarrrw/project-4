@@ -21,5 +21,5 @@ from controllers import act_cont, order_cont, reaction_cont, user_cont
 
 app.register_blueprint(act_cont.router, url_prefix='/api')
 app.register_blueprint(order_cont.router, url_prefix='/api')
-# app.register_blueprint(reaction_cont.router, url_prefix='/api')
+app.register_blueprint(reaction_cont.router, url_prefix='/api')
 app.register_blueprint(user_cont.router, url_prefix='/api')

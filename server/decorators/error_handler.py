@@ -4,7 +4,7 @@ from marshmallow.exceptions import ValidationError
 
 @app.errorhandler(ValidationError)
 def validation_error(e):
-    return{"errors": e.messages, "messages":"Something went wrong"}
+    return {"errors": e.messages, "messages": "Something went wrong"}
 
 @app.errorhandler(Exception)
 def general_error(e):
