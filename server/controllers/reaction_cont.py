@@ -1,9 +1,10 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, g
 from models.reaction_model import Reaction
 from serializers.reaction_serial import ReactionSchema
 from models.act_model import Act
 from serializers.act_serial import ActSchema
 from marshmallow.exceptions import ValidationError
+from decorators.secure_route import secure_route
 
 reaction_schema = ReactionSchema()
 act_schema = ActSchema()
@@ -24,15 +25,17 @@ def get_reactions():
 # -----POST ACT REACTIONS------
 
 @router.route("/reactions/<int:act_id>", methods=["POST"])
+@secure_route
 def make_reaction(act_id):
     reaction_dictionary = request.json
-    act = Act.query.get(act_id)
     # print(reaction_dictionary, act)    
+    # add act then change act id below
     try:
         reaction = reaction_schema.load(reaction_dictionary)
         print(reaction)
-        reaction.act = act
+        reaction.act_id = act_id
         print(reaction.act)
+        reaction.user = g.current_user
     except ValidationError as e:
         return {"errors": e.messages, "messages": "Something went wrong"}
     
@@ -43,9 +46,9 @@ def make_reaction(act_id):
 
 # -----DELETE ACT REACTIONS------
 
-@router.route("/reactions/<int:reaction_id>/acts/<int:act_id>", methods=["DELETE"])
-def delete_reaction(act_id, reaction_id):
+@router.route("/reactions/<int:reaction_id>", methods=["DELETE"])
+def delete_reaction(reaction_id):
     reaction = Reaction.query.get(reaction_id)
     reaction.remove()
-    act = Act.query.get(act_id)
-    return act_schema.jsonify(act), 202
+    # if not current user
+    return 'You\'ve deleted your reaction', 202
