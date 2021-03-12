@@ -1,5 +1,5 @@
 from app import ma
-from models.product import Product
+from models.product_model import Product
 
 class ProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:

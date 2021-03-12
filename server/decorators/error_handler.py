@@ -9,3 +9,8 @@ def validation_error(e):
 @app.errorhandler(Exception)
 def general_error(e):
     return{"errors": str(e), "messages":"Something else went wrong"}
+
+# @app.errorhandler()
+# def admin_access_only(e):
+#     # if user.id is not an admin:
+#     return{"error: Not Authorised"}
