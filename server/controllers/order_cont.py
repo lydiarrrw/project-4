@@ -1,3 +1,6 @@
 from flask import Blueprint, g
+from serializers.order_serial import OrderSchema
 
-route = Blueprint(__name__, "orders")
+order_schema = OrderSchema()
+
+router = Blueprint(__name__, "orders")

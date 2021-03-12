@@ -7,7 +7,7 @@ from marshmallow.exceptions import ValidationError
 class UserSchema(ma.SQLAlchemyAutoSchema):
 
     @validates_schema
-    def check_passwords_match(self, data):
+    def check_passwords_match(self, data, **kwargs):
         if data.get('password') != data.get('password_confirmation'):
             raise ValidationError(
                 'Passwords do not match',
@@ -20,11 +20,8 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
         load_instance = True
-        exclude = ("password_hash","isAdmin")
-        load_only = ("email", "password")
+        exclude = ("password_hash",)
+        load_only = ("email", "password","is_admin", "password_confirmation")
 
-    
     acts = fields.Nested("ActSchema", many = True)
     orders = fields.Nested("OrderSchema", many = True)
-
-

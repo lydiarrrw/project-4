@@ -1,13 +1,13 @@
 from flask import Blueprint, request
 # from models.reaction_model import Reaction
-# from serializers.reaction_serial import ReactionSchema
+from serializers.reaction_serial import ReactionSchema
 # from models.act_model import Act
-# from serializers.act_serial import ActSchema
+from serializers.act_serial import ActSchema
 
 # from marshmallow.exceptions import ValidationError
 
-# reaction_schema = ReactionSchema()
-# act_schema = ActSchema()
+reaction_schema = ReactionSchema()
+act_schema = ActSchema()
 
 router = Blueprint(__name__, "reactions")
 

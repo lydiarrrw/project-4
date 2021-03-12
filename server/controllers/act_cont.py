@@ -1,3 +1,6 @@
 from flask import Blueprint, g
+from serializers.act_serial import ActSchema
 
-route = Blueprint(__name__, "acts")
+act_schema = ActSchema()
+
+router = Blueprint(__name__, "acts")
