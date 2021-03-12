@@ -10,3 +10,4 @@ class OrderSchema(ma.SQLAlchemyAutoSchema):
     products = fields.Nested("SimpleProductSchema", many=True)
     act = fields.Nested("SimpleActSchema")
     user = fields.Nested("SimpleUserSchema")
+
