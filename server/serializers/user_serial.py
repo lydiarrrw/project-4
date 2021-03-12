@@ -22,8 +22,9 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
         exclude = ("password_hash",)
         load_only = ("email", "password","is_admin", "password_confirmation")
 
-    acts = fields.Nested("ActSchema", many = True)
+    acts = fields.Nested("SimpleActSchema", many = True)
     orders = fields.Nested("OrderSchema", many = True)
+
 
 class SimpleUserSchema(ma.SQLAlchemyAutoSchema):
 

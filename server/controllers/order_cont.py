@@ -14,15 +14,18 @@ user_schema = UserSchema()
 
 router = Blueprint(__name__, "orders")
 
+
 @router.route("/products", methods=["GET"])
 def get_all_products():
     products = Product.query.all()
     return product_schema.jsonify(products, many=True), 200
 
+
 @router.route("/order", methods=["GET"])
 def get_all_orders():
     orders = Order.query.all()
     return order_schema.jsonify(orders, many=True), 200
+
 
 @router.route("/order/<int:act_id>", methods=["POST"])
 @secure_route
