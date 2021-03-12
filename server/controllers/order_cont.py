@@ -14,10 +14,12 @@ user_schema = UserSchema()
 
 router = Blueprint(__name__, "orders")
 
+
 @router.route("/products", methods=["GET"])
 def get_all_products():
     products = Product.query.all()
     return product_schema.jsonify(products, many=True), 200
+
 
 @router.route("/order", methods=["GET"])
 @secure_route
@@ -36,7 +38,6 @@ def create_an_order(act_id):
         products.append(product)
     
     try:
-
         order = Order(user_id = g.current_user.id, act_id = act_id, ready_to_collect = False, products = products) 
         order.save()   
 

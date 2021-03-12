@@ -2,11 +2,13 @@ from flask import Blueprint, request, g
 from models.user_model import User
 from models.act_model import Act
 from serializers.user_serial import UserSchema
+from serializers.act_serial import ActSchema
 from marshmallow.exceptions import ValidationError
 from decorators.secure_route import secure_route
 
 
 user_schema = UserSchema()
+act_schema = ActSchema()
 
 router = Blueprint(__name__, "users")
 
@@ -63,17 +65,19 @@ def update_personal_schedule(act_id):
 
     act = Act.query.get(act_id)
 
+    user.acts.find()
+
     if not act:
         return {'message': 'This act has not been found'}, 404
+
+    print(user.acts)
 
     if act in user.acts:
         user.acts.remove(act)
 
     else:
         user.acts.append(act)
-
+     
     user.save()
 
     return user_schema.jsonify(user), 200
-
-
