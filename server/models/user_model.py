@@ -9,7 +9,6 @@ from models.users_acts_model import users_acts_join
 from sqlalchemy.orm import validates
 
 
-
 class User(db.Model, BaseModel):
 
     __tablename__ = 'users'
