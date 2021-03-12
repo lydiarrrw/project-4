@@ -34,4 +34,4 @@ class SimpleUserSchema(ma.SQLAlchemyAutoSchema):
         load_only = ("email", "password","is_admin", "password_confirmation")
     
     # acts = fields.Nested("SimpleActSchema", many = True)
-    # orders = fields.Nested("SimpleOrderSchema", many = True)
+    # orders = fields.Nested("OrderSchema", many = True)

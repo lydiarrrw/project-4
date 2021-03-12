@@ -30,18 +30,21 @@ def get_all_orders():
 # def create_an_order(act_id):
     order_dictionary = request.json
     
-    print(f'ORDER DICTIONARY = {order_dictionary}')
+    products = []
+    for product_id in order_dictionary["products"]:
+        product = Product.query.get(product_id)
+        products.append(product)
+    
     try:
-        order = order_schema.load(order_dictionary)
-        order.user = g.current_user
-        order.act_id = act_id
+
+        order = Order(user_id = g.current_user.id, act_id = act_id, ready_to_collect = False, products = products) 
+        order.save()   
 
     except ValidationError as e:
         return { 'errors': e.messages, 'messages': 'Something went wrong 🙅🏼‍♀️' }
-    
-    order.save()
-
+   
     return order_schema.jsonify(order), 200
+
 
 @router.route("/order/<int:order_id>", methods=["DELETE"])
 def delete_an_order(order_id):
