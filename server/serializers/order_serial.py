@@ -7,7 +7,6 @@ class OrderSchema(ma.SQLAlchemyAutoSchema):
         model = Order
         load_instance = True
 
-# nest products inside of order??
-products = fields.Nested("ProductSchema", many=True)
-act = fields.Nested("ActSchema")
-user = fields.Nested("UserSchema")
+    products = fields.Nested("SimpleProductSchema", many=True)
+    act = fields.Nested("SimpleActSchema")
+    user = fields.Nested("SimpleUserSchema")

@@ -3,7 +3,6 @@ from models.base_model import BaseModel
 from models.order_model import Order
 from models.reaction_model import Reaction
 
-
 class Act(db.Model, BaseModel):
 
     __tablename__ = "acts"

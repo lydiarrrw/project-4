@@ -3,7 +3,6 @@ from models.user_model import User
 from marshmallow import fields, validates_schema
 from marshmallow.exceptions import ValidationError
 
-
 class UserSchema(ma.SQLAlchemyAutoSchema):
 
     @validates_schema
@@ -25,3 +24,11 @@ class UserSchema(ma.SQLAlchemyAutoSchema):
 
     acts = fields.Nested("ActSchema", many = True)
     orders = fields.Nested("OrderSchema", many = True)
+
+class SimpleUserSchema(ma.SQLAlchemyAutoSchema):
+
+    class Meta:
+        model = User
+        load_instance = True
+        exclude = ("password_hash", "created_at")
+        load_only = ("email", "password","is_admin", "password_confirmation")
