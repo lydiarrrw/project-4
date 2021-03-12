@@ -20,16 +20,15 @@ def get_all_products():
     return product_schema.jsonify(products, many=True), 200
 
 @router.route("/order", methods=["GET"])
+@secure_route
 def get_all_orders():
     orders = Order.query.all()
     return order_schema.jsonify(orders, many=True), 200
 
-@router.route("/order/<int:act_id>", methods=["POST"])
-@secure_route
-def create_an_order(act_id):
-    #get the order
+# @router.route("/order/<int:act_id>", methods=["POST"])
+# @secure_route
+# def create_an_order(act_id):
     order_dictionary = request.json
-    #get the user
     
     print(f'ORDER DICTIONARY = {order_dictionary}')
     try:

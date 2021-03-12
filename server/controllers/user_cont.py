@@ -46,14 +46,12 @@ def login():
     return { "token": token, "message": f"Welcome back {user.username.title()}!" }
 
 
-
 # ----- GET FULL PROFILE -----
 
 @router.route("/profile", methods=["GET"])
 @secure_route
 def get_user_profile():
     return user_schema.jsonify(g.current_user), 200
-
 
 # ----- ADD OR REMOVE AN ACT FROM USER PROFILE -----
 
