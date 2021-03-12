@@ -28,12 +28,12 @@ def get_reactions():
 @secure_route
 def make_reaction(act_id):
     reaction_dictionary = request.json
-    # print(reaction_dictionary, act)    
-    # add act then change act id below
+    act = Act.query.get(act_id)
+    
     try:
         reaction = reaction_schema.load(reaction_dictionary)
         print(reaction)
-        reaction.act_id = act_id
+        reaction.act = act
         print(reaction.act)
         reaction.user = g.current_user
     except ValidationError as e:
@@ -47,8 +47,13 @@ def make_reaction(act_id):
 # -----DELETE ACT REACTIONS------
 
 @router.route("/reactions/<int:reaction_id>", methods=["DELETE"])
+@secure_route
 def delete_reaction(reaction_id):
     reaction = Reaction.query.get(reaction_id)
+    print(reaction.user)
+    print(g.current_user)
+    if reaction.user != g.current_user:
+        return {'errors': 'This isn\'t your reaction to delete'}, 402 
     reaction.remove()
-    # if not current user
-    return 'You\'ve deleted your reaction', 202
+    
+    return 'You\'ve deleted your reaction', 200
