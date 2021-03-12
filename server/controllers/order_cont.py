@@ -27,7 +27,6 @@ def get_all_orders():
     orders = Order.query.all()
     return order_schema.jsonify(orders, many=True), 200
 
-
 @router.route("/order/<int:act_id>", methods=["POST"])
 @secure_route
 def create_an_order(act_id):
