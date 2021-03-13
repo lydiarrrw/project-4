@@ -28,6 +28,7 @@ export default function LoginPage({ history }){
   }
   
   return <form onSubmit={handleSubmit}>
+    <h1 className="title is-2 has-text-danger">Login</h1>
     <div>
       <label>Email</label>
       <input
@@ -46,7 +47,7 @@ export default function LoginPage({ history }){
         name={'password'}
       />
     </div>
-    <button>Login!</button>
+    <button className="button is-danger">Login!</button>
   </form>
   
 }
