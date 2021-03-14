@@ -11,22 +11,24 @@ def test_get_reactions():
 def test_make_reaction():
     # create a client
     client = app.test_client()
-    # login ---
-    login_data = {"password":"lydia", "email":"lydia@lydia.com"}
-    response = client.post('/api/login', data=json.dumps(login_data), content_type="application/json")
-    token = response.json
+    login ---
+    login_data = {"password":"test", "email":"test@test.com"}
+    login_response = client.post('/api/login', data=json.dumps(login_data), content_type="application/json")
+    token = login_response.json
     # ---
+    assert len(token) !=0
     
-    
-    # # token = login(client)
-    # reaction_data = {"reaction_type": "🎉"}
-    # request_headers = {"Authorization": f"Bearer {token}"}
-    # reaction_response = client.post(
-    #     "/api/reactions",
-    #     data=json.dumps(reaction_data),
-    #     content_type="application/json",
-    #     headers=request_headers,
-    # )
-    # assert reaction_response.json["reaction_type"] == '🎉'
+    # token = login(client)
+    reaction_data = {"reaction_type":"🎉"}
+    print(reaction_data)
+    request_headers = {"Authorization": f"Bearer {token}"}
+    reaction_response = client.post(
+        "/api/reactions",
+        data=json.dumps(reaction_data),
+        content_type="application/json",
+        headers=request_headers,
+    )
+    print(reaction_response)
+    assert reaction_response.json["reaction_type"] == "🎉"
 
 # def test_delete_reaction
