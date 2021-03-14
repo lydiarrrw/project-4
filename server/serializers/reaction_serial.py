@@ -10,8 +10,6 @@ class ReactionSchema(ma.SQLAlchemyAutoSchema):
 
     user = fields.Nested("SimpleUserSchema")
 
-
-
 class SimpleReactionSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Reaction

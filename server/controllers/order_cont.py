@@ -42,7 +42,7 @@ def create_an_order(act_id):
         order.save()   
 
     except ValidationError as e:
-        return { 'errors': e.messages, 'messages': 'Something went wrong 🙅🏼‍♀️' }
+        return { 'errors': e.messages, 'message': 'Something went wrong 🙅🏼‍♀️' }
    
     return order_schema.jsonify(order), 200
 

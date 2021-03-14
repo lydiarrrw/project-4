@@ -1,4 +1,4 @@
-from flask import Blueprint, request, g
+from flask import Blueprint, request, g, jsonify
 from models.user_model import User
 from models.act_model import Act
 from serializers.user_serial import UserSchema
@@ -24,25 +24,27 @@ def signup():
         user = user_schema.load(user_json)
 
     except ValidationError as e:
-        return { "errors": e.messages, "messages": "Something went wrong." }, 400
+        return { "errors": e.messages, "message": "Something went wrong." }, 400
 
     user.save()
 
     return user_schema.jsonify(user), 201
 
 
-
 # ----- LOG IN -----
 
 @router.route("/login", methods=["POST"])
 def login():
-    user = User.query.filter_by(email=request.json["email"]).first()
+    email = request.json["email"]
+    password = request.json["password"]
 
-    if not user:
-        return { "message": "No user found for this email" }, 404
+    if not email or not password:
+        return { "message": "Email or password missing" }, 400
 
-    if not user.validate_password(request.json["password"]):
-        return { "message" : "Wrong password entered" }, 401  
+    user = User.query.filter_by(email = email).first()
+
+    if not user or not user.validate_password(request.json["password"]):
+        return { "message": "Wrong email or password entered" }, 404
 
     token = user.generate_token()
     return { "token": token, "message": f"Welcome back {user.username.title()}!" }
@@ -63,17 +65,23 @@ def get_user_profile():
 def update_personal_schedule(act_id):
 
     user = g.current_user
-    
-    act = Act.query.get(act_id)
 
-    if not act:
+    selected_act = Act.query.get(act_id)
+
+    if not selected_act:
         return {'message': 'This act has not been found'}, 404
 
-    if act in user.acts:
-        user.acts.remove(act)
-
-    else:
-        user.acts.append(act)
+    if selected_act in user.acts:
+        user.acts.remove(selected_act)
+ 
+    else: 
+        current_user_act_list = [act.set_time for act in user.acts if selected_act.set_time == act.set_time]
+        
+        if current_user_act_list:
+            return {'message': 'You already have plans at this time. If you wish add this act to your personal schedule, please remove the clashing act first and then try to add the new act again.'}, 403
+        
+        else:
+            user.acts.append(selected_act)
      
     user.save()
 
