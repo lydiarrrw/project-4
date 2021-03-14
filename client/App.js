@@ -6,6 +6,8 @@ import NavBar from './components/navBar'
 import LoginPage from './components/login'
 import Register from './components/register'
 
+
+
 import 'bulma'
 import './styles/style.scss'
 
@@ -29,8 +31,9 @@ const App = () => (
 
 const Home = () => {
   const token = localStorage.getItem('token')
-  console.log(token)
-    
+  
+  console.log(localStorage)
+  console.log(localStorage.getItem('is_admin'))
   return <main>
     <div className="hero">
       <h1>Home page</h1>

@@ -1,0 +1,21 @@
+@import "../../node_modules/bulma/bulma.sass";
+
+.newnav {
+  background-color: aqua;
+  margin-left: 0px !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.menu-list {
+  width: 100%;
+}
+
+.dropdown {
+  position: fixed;
+  background-color:cyan;
+  width: 20%;
+  height: 100%;
+  z-index: 50;
+}

@@ -44,21 +44,25 @@ export default function Register({ history }) {
             <h1 className="title is-2 has-text-danger">Sign up</h1>
             <div>
               <label>Username: </label>
-              <input
-                type="text"
-                value={formData.username}
-                onChange={handleChange}
-                name={'username'}
-              />
+              <div>
+                <input
+                  type="text"
+                  value={formData.username}
+                  onChange={handleChange}
+                  name={'username'}
+                />
+              </div>
             </div>
             <div>
-              <label>Email: </label>
-              <input
-                type="text"
-                value={formData.email}
-                onChange={handleChange}
-                name={'email'}
-              />
+              <div>
+                <label>Email: </label>
+                <input
+                  type="text"
+                  value={formData.email}
+                  onChange={handleChange}
+                  name={'email'}
+                />
+              </div>
             </div>
             <div>
               <label>Password: </label>
