@@ -7,6 +7,7 @@ export default function LoginPage({ history }){
     password: ''
   })
 
+
   function handleChange(event) {
     const { name, value } = event.target
     updateFormData({ ...formData, [name]: value })

@@ -37,7 +37,7 @@ def make_reaction(act_id):
         print(reaction.act)
         reaction.user = g.current_user
     except ValidationError as e:
-        return {"errors": e.messages, "messages": "Something went wrong"}
+        return {"errors": e.messages, "messages": "You were unable to make a reaction"}
     
     reaction.save()
     
