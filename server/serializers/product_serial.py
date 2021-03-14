@@ -5,6 +5,7 @@ class ProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Product
         load_instance = True
+        exclude = ("created_at",)
 
 class SimpleProductSchema(ma.SQLAlchemyAutoSchema):
     class Meta:

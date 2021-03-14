@@ -32,16 +32,16 @@ def make_reaction(act_id):
     
     try:
         reaction = reaction_schema.load(reaction_dictionary)
-        print(reaction)
+
         reaction.act = act
-        print(reaction.act)
+
         reaction.user = g.current_user
     except ValidationError as e:
         return {"errors": e.messages, "messages": "Something went wrong"}
     
     reaction.save()
     
-    return reaction_schema.jsonify(reaction)
+    return act_schema.jsonify(act)
 
 
 # -----DELETE ACT REACTIONS------
@@ -50,8 +50,7 @@ def make_reaction(act_id):
 @secure_route
 def delete_reaction(reaction_id):
     reaction = Reaction.query.get(reaction_id)
-    print(reaction.user)
-    print(g.current_user)
+
     if reaction.user != g.current_user:
         return {'errors': 'This isn\'t your reaction to delete'}, 402 
     reaction.remove()

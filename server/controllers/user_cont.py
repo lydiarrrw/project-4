@@ -55,6 +55,7 @@ def login():
 def get_user_profile():
     return user_schema.jsonify(g.current_user), 200
 
+
 # ----- ADD OR REMOVE AN ACT FROM USER PROFILE -----
 
 @router.route("/profile/<int:act_id>", methods=["PUT"])
@@ -62,15 +63,11 @@ def get_user_profile():
 def update_personal_schedule(act_id):
 
     user = g.current_user
-
+    
     act = Act.query.get(act_id)
-
-    user.acts.find()
 
     if not act:
         return {'message': 'This act has not been found'}, 404
-
-    print(user.acts)
 
     if act in user.acts:
         user.acts.remove(act)
