@@ -7,8 +7,6 @@ from models.base_model import BaseModel
 from models.act_model import Act
 from models.users_acts_model import users_acts_join
 from sqlalchemy.orm import validates
-import re
-
 
 class User(db.Model, BaseModel):
 
