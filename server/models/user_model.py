@@ -7,6 +7,7 @@ from models.base_model import BaseModel
 from models.act_model import Act
 from models.users_acts_model import users_acts_join
 from sqlalchemy.orm import validates
+import re
 
 
 class User(db.Model, BaseModel):
@@ -27,15 +28,24 @@ class User(db.Model, BaseModel):
     #relationship 1 user to many orders
     orders = db.relationship('Order', backref = 'user', cascade = 'all,delete')
 
-
+    # hybrid field for password, password hashing and password validation
     @hybrid_property
     def password(self):
         pass
 
     @password.setter
     def password(self, password_plain_text):
+
+        if not password_plain_text:
+            raise AssertionError('Password not provided')
+
+        if len(password_plain_text) < 8 or len(password_plain_text) > 128:
+            raise AssertionError('Pasword must contain between 8 and 128 characters')
+
         self.password_hash = bcrypt.generate_password_hash(password_plain_text).decode('utf-8')
 
+
+    # hybrd field for password confirmation at registration
     @hybrid_property
     def password_confirmation(self):
         pass
@@ -44,11 +54,11 @@ class User(db.Model, BaseModel):
     def password_confirmation(self, plaintext):
         return plaintext
 
-
     def validate_password(self,password_plain_text):
         return bcrypt.check_password_hash(self.password_hash, password_plain_text)
 
 
+    # generating a token at login
     def generate_token(self):
         payload = {
             'sub': self.id,
@@ -58,8 +68,31 @@ class User(db.Model, BaseModel):
         token = jwt.encode(payload, secret, 'HS256')
         return token
    
-    
+
+    # validation fields and error handling
+    @validates('username')
+    def validate_username(self, key, username):
+        if not username:
+            raise AssertionError('No username provided')
+
+        if User.query.filter(User.username == username).first():
+            raise AssertionError('Username already in use')
+
+        if len(username) > 15:
+            raise AssertionError('Username must contain 15 characters maximum')
+
+        return username
+
+
     @validates('email')
-    def validate_email(self, key, address):
-        assert '@' in address
-        return address
+    def validate_email(self, key, email):
+        if not email:
+            raise AssertionError('No email provided')
+
+        if User.query.filter(User.email == email).first():
+            raise AssertionError('Email already in use')
+
+        if not re.match("[^@]+@[^@]+\.[^@]+", email):
+            raise AssertionError('Provided email is not a valid email address')
+
+        return email

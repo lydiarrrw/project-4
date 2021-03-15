@@ -12,6 +12,7 @@ def login(client):
     )
     assert len(login_response.json["token"]) != 0
     return login_response.json["token"]
+    
 
 def setup_db():
     with app.app_context():
