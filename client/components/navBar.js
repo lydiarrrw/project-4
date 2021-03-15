@@ -33,7 +33,7 @@ const NavBar = ({ history }) => {
 
 
 
-  return <>
+  return <nav>
     <div className="newnav navbar-brand">
       <div>
         <a role="button" onClick={() => showMenu(!menu)}>
@@ -47,7 +47,7 @@ const NavBar = ({ history }) => {
       </Link>
     </div>
     <div>{nav}</div>
-  </>
+  </nav>
 
 
 }
