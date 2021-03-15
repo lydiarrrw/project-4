@@ -70,29 +70,29 @@ class User(db.Model, BaseModel):
    
 
     # validation fields and error handling
-    @validates('username')
-    def validate_username(self, key, username):
-        if not username:
-            raise AssertionError('No username provided')
+    # @validates('username')
+    # def validate_username(self, key, username):
+    #     if not username:
+    #         raise AssertionError('No username provided')
 
-        if User.query.filter(User.username == username).first():
-            raise AssertionError('Username already in use')
+    #     if User.query.filter(User.username == username).first():
+    #         raise AssertionError('Username already in use')
 
-        if len(username) > 15:
-            raise AssertionError('Username must contain 15 characters maximum')
+    #     if len(username) > 15:
+    #         raise AssertionError('Username must contain 15 characters maximum')
 
-        return username
+    #     return username
 
 
-    @validates('email')
-    def validate_email(self, key, email):
-        if not email:
-            raise AssertionError('No email provided')
+    # @validates('email')
+    # def validate_email(self, key, email):
+    #     if not email:
+    #         raise AssertionError('No email provided')
 
-        if User.query.filter(User.email == email).first():
-            raise AssertionError('Email already in use')
+    #     if User.query.filter(User.email == email).first():
+    #         raise AssertionError('Email already in use')
 
-        if not re.match("[^@]+@[^@]+\.[^@]+", email):
-            raise AssertionError('Provided email is not a valid email address')
+    #     if not re.match("[^@]+@[^@]+\.[^@]+", email):
+    #         raise AssertionError('Provided email is not a valid email address')
 
-        return email
+    #     return email
