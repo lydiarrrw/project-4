@@ -6,12 +6,10 @@ from serializers.act_serial import ActSchema
 from marshmallow.exceptions import ValidationError
 from decorators.secure_route import secure_route
 
-
 user_schema = UserSchema()
 act_schema = ActSchema()
 
 router = Blueprint(__name__, "users")
-
 
 # ----- SIGN UP -----
 

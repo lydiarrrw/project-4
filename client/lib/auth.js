@@ -7,7 +7,6 @@ export function getLoggedInUserId() {
   const payloadAsObject = JSON.parse(payloadAsString)
   return payloadAsObject.sub
 }
-
 //compare  user id 
 export function isCreator(userIdToCompare) {
   if (!userIdToCompare) return false

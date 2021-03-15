@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { getLoggedInUserId }  from '../lib/auth'
 // import { Link, withRouter } from 'react-router-dom'
 
 export default function AdminDashboard() {
   const [orders, updateOrders] = useState('')
+  
+  const loggedIn = getLoggedInUserId()
+  console.log('hello' + loggedIn)
 
   useEffect(() => {
     async function fetchCompany() {
@@ -18,6 +22,6 @@ export default function AdminDashboard() {
     fetchCompany()
 
   }, [])
-  console.log(orders)
+  
   return <h1>Hello world</h1>
 }

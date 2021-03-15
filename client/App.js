@@ -5,6 +5,7 @@ import NavBar from './components/navBar'
 import Home from './components/Home'
 import LoginPage from './components/login'
 import Register from './components/register'
+import LineUp from './components/LineUp'
 import AdminDashboard from './components/adminDashboard'
 import Profile from './components/userProfile'
 
@@ -22,8 +23,8 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/signup" component={Register} />
       <Route exact path="/login" component={LoginPage} />
-      {/* <Route exact path="/acts" component={LineUp} /> */}
-      <Route exact path="/profile" component={Profile} />
+      <Route exact path="/lineup" component={LineUp} />
+      <Route exact path="/profile" component={Profile} />}
       <Route exact path="/admin" component={AdminDashboard} />
       {/* <Route exact path="/menu" component={Menu} /> */}
     </Switch>
