@@ -1,15 +1,31 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+// import { isCreator } from '../lib/auth'
 
 
 
-const NavBar = ({ history }) => {
+
+const NavBar = ({ history, location }) => {
+  console.log('hello' + location)
+  const [user, updateUser] = useState({})
+  const token = localStorage.getItem('token')
+
+  useEffect(() => {
+    axios.get('api/profile', { headers: { Authorization: `Bearer ${token}` } })
+      .then(resp => updateUser(resp.data))
+  }, [])
+  
+  console.log(user.is_admin)
+
 
   function handleLogout() {
     localStorage.removeItem('token') // ! This logs you out.
-    history.push('/')
+    history.push('/lineup')
+    updateUser({})
   }
+
+  console.log(localStorage)
 
   const [menu, showMenu] = useState(false)
   // const loggedIn = getLoggedInUserId()
@@ -23,7 +39,7 @@ const NavBar = ({ history }) => {
         {/* <li><Link to={'/acts'}><strong>Acts</strong></Link></li> */}
         <li>{localStorage.getItem('token') && <Link to="/menu" className="button is-danger is-outlined grow">Menu</Link>}</li>
         {/* <li><Link to={'/menu'}><strong>Place<br />Order</strong></Link></li> */}
-        <li>{localStorage.getItem('token') && <Link to="/admin" className="button is-danger is-outlined grow">ADMIN</Link>}</li>
+        <li>{(user.is_admin === true) && <Link to="/admin" className="button is-danger is-outlined grow">ADMIN</Link>}</li>
         <li>{!localStorage.getItem('token') && <Link to="/signup" className="button is-danger is-outlined grow">Sign Up</Link>}</li>
         <li>{!localStorage.getItem('token') && <Link to="/login" className="button is-danger is-outlined grow">Login</Link>}</li>
         <li>{localStorage.getItem('token') && <button onClick={handleLogout} className="button is-danger is-outlined grow">Logout</button>}</li>

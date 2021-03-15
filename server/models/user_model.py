@@ -69,10 +69,24 @@ class User(db.Model, BaseModel):
         return token
    
 
+    # validation fields and error handling
+    @validates('username')
+    def validate_username(self, key, username):
+        if not username:
+            raise AssertionError('No username provided')
+
         if len(username) > 15:
             raise AssertionError('Username must contain 15 characters maximum')
 
- 
+        return username
+
+
+    @validates('email')
+    def validate_email(self, key, email):
+        if not email:
+            raise AssertionError('No email provided')
+
         if not re.match("[^@]+@[^@]+\.[^@]+", email):
             raise AssertionError('Provided email is not a valid email address')
 
+        return email

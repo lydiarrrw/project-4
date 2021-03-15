@@ -12,3 +12,4 @@ export function isCreator(userIdToCompare) {
   if (!userIdToCompare) return false
   return userIdToCompare === getLoggedInUserId()
 }
+
