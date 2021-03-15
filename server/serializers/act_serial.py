@@ -6,6 +6,7 @@ class ActSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Act
         load_instance = True
+        exclude = ("created_at",)
 
     reactions = fields.Nested("ReactionSchema", many = True)
 

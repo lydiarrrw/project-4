@@ -41,12 +41,13 @@ export default function LineUp() {
       await axios.put(`/api/profile/${actID}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       })
-    } catch(err) {
+    } catch (err) {
       console.log(err)
       alert(err.response.data.message)
     }
   }
 
+  
   return <main>
     <div className="tabs is-toggle is-fullwidth">
       <ul onClick={(event) => updateStage(event.target.innerText)}>
