@@ -1,4 +1,7 @@
 @import "../../node_modules/bulma/bulma.sass";
+.diamond-stage { 
+  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  // height: 600px;
 
 .newnav {
   // background-color: aqua;
@@ -41,4 +44,10 @@ input {
 
 label {
   font-weight: 500;
+}
+
+#hero-home{
+  background-image: url('https://static.billboard.com/files/media/Greatest-festival-performances-of-all-time-billboard-fea-1500-compressed.jpg');
+  background-position: center;
+  background-size: cover;
 }
