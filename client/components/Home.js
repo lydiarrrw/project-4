@@ -10,7 +10,7 @@ function Home() {
 
 
     <section className="section" id="hero-home">
-      <Link to="/acts">
+      <Link to="/lineup">
         <div className="hero-body">
           <h2 className="subtitle">View Line Up</h2>
         </div>
