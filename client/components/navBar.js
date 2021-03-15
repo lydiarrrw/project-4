@@ -19,7 +19,7 @@ const NavBar = ({ history }) => {
   if (menu) {
     nav = <div>
       <ul className="menu-list">
-        <li>{localStorage.getItem('token') && <Link to="/acts" className="button is-danger is-outlined grow">Acts</Link>}</li>
+        <li>{localStorage.getItem('token') && <Link to="/lineup" className="button is-danger is-outlined grow">Acts</Link>}</li>
         {/* <li><Link to={'/acts'}><strong>Acts</strong></Link></li> */}
         <li>{localStorage.getItem('token') && <Link to="/menu" className="button is-danger is-outlined grow">Menu</Link>}</li>
         {/* <li><Link to={'/menu'}><strong>Place<br />Order</strong></Link></li> */}
@@ -33,7 +33,7 @@ const NavBar = ({ history }) => {
 
 
 
-  return <>
+  return <nav>
     <div className="newnav navbar-brand">
       <div>
         <a role="button" onClick={() => showMenu(!menu)}>
@@ -47,7 +47,7 @@ const NavBar = ({ history }) => {
       </Link>
     </div>
     <div>{nav}</div>
-  </>
+  </nav>
 
 
 }
