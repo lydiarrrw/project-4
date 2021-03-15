@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
 
+
 const NavBar = ({ history }) => {
 
   function handleLogout() {
@@ -11,6 +12,7 @@ const NavBar = ({ history }) => {
   }
 
   const [menu, showMenu] = useState(false)
+  // const loggedIn = getLoggedInUserId()
 
   let nav
 
