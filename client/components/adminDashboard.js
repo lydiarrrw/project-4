@@ -26,7 +26,7 @@ export default function AdminDashboard() {
     fetchOrders()
 
   }, [])
-
+  console.log(token)
   
 // delete an order
 // change order status

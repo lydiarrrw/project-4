@@ -7,8 +7,8 @@ export default function LineUp() {
   const [modal, showModal] = useState(false)
   const [artist, updateArtist] = useState({})
   const token = localStorage.getItem('token')
-  const [toggle, setToggle] = useState(false)
-
+  // const [toggle, setToggle] = useState(false)
+  const [stageImage, updateStageImage] = useState('https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')
 
   async function getLineUp() {
     try {
@@ -41,7 +41,7 @@ export default function LineUp() {
       await axios.put(`/api/profile/${actID}`, {}, {
         headers: { Authorization: `Bearer ${token}` }
       })
-    } catch(err) {
+    } catch (err) {
       console.log(err)
       alert(err.response.data.message)
     }
@@ -67,18 +67,36 @@ export default function LineUp() {
         </li>
       </ul>
     </div>
-    <img className="stages is-fullwidth" src="https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" />
-    <div>
-      {filterByStage().map(act => {
-        return <div className="card" key={act.id}>
-          <div className="card-content is-flex is-justify-content-space-between" key={act.id}>
-            <img className="image is-64x64" src={act.image} />
-            <h5 className="title is-4 is-clickable" onClick={() => clickedArtist(event, showModal(!modal))}>{act.artist_name}</h5>
-            <h6 className="is-size-4">{act.set_time}</h6>
-            <button className="button is-success"onClick={(event) => saveArtistToUser(token, act.id)}>save</button>
+    <img className="stages is-fullwidth" src={stageImage} />
+    <div className="columns">
+      <div className="column">
+        <div className="card" >
+          <div className="card-content is-flex is-justify-content-space-between column">
+            <div className="column title is-4">Artist</div>
+            <div className="column title is-4">Set Time</div>
+            <div className="column title is-4">Add to your lineup</div>
           </div>
         </div>
-      })}
+        {filterByStage().map(act => {
+          return <div className="card" key={act.id}>
+            <div className="card-content is-flex is-justify-content-space-between column" key={act.id}>
+              <img className="image is-64x64" src={act.image} />
+              <div className="column">
+                <h5 className="title is-4 is-clickable" onClick={() => clickedArtist(event, showModal(!modal))}>{act.artist_name}</h5>
+              </div>
+              <div className="column">
+                <h6 className="is-size-4">{act.set_time}</h6>
+              </div>
+              <div className="column pretty p-switch p-fill">
+                <input type="checkbox" onChange={(event) => saveArtistToUser(token, act.id)} />
+                <div className="state p-success">
+                  <label></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        })}
+      </div>
     </div>
     <div className={`modal ${modal ? 'is-active' : ''}`}>
       <div className="modal-background"></div>
@@ -103,6 +121,5 @@ export default function LineUp() {
         </footer>
       </div>
     </div>
-
   </main>
 }

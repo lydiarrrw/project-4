@@ -1,6 +1,7 @@
 @import "../../node_modules/bulma/bulma.sass";
+@import '~pretty-checkbox/src/pretty-checkbox.scss';
 
-.diamond-stage { 
+.stages { 
   background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
   // height: 600px;
 }
