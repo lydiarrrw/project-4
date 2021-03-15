@@ -4,6 +4,7 @@ import './styles/style.scss'
 import axios from 'axios'
 import LoginPage from './components/login'
 import Register from './components/register'
+import LineUp from './components/LineUp'
 
 import 'bulma'
 import './styles/style.scss'
@@ -16,8 +17,8 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/register" component={Register} />
       <Route exact path="/login" component={LoginPage} />
-      {/* <Route exact path="/acts" component={LineUp} />
-      <Route exact path="/profile" component={Profile} />
+      <Route exact path="/lineup" component={LineUp} />
+      {/*<Route exact path="/profile" component={Profile} />
       <Route exact path="/admin" component={Admin} />
       <Route exact path="/menu" component={Menu} /> */}
     </Switch>

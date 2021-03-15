@@ -6,12 +6,10 @@ from serializers.act_serial import ActSchema
 from marshmallow.exceptions import ValidationError
 from decorators.secure_route import secure_route
 
-
 user_schema = UserSchema()
 act_schema = ActSchema()
 
 router = Blueprint(__name__, "users")
-
 
 # ----- SIGN UP -----
 
@@ -29,7 +27,6 @@ def signup():
     user.save()
 
     return user_schema.jsonify(user), 201
-
 
 
 # ----- LOG IN -----
@@ -65,7 +62,7 @@ def update_personal_schedule(act_id):
 
     act = Act.query.get(act_id)
 
-    user.acts.find()
+    # user.acts.find()
 
     if not act:
         return {'message': 'This act has not been found'}, 404
