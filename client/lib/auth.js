@@ -5,7 +5,7 @@ export function getLoggedInUserId() {
   //atob decodes token to readable string
   const payloadAsString = atob(token.split('.')[1])
   const payloadAsObject = JSON.parse(payloadAsString)
-  return payloadAsObject.userId
+  return payloadAsObject.sub
 }
 
 //compare  user id 
