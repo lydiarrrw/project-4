@@ -75,9 +75,6 @@ class User(db.Model, BaseModel):
         if not username:
             raise AssertionError('No username provided')
 
-        if User.query.filter(User.username == username).first():
-            raise AssertionError('Username already in use')
-
         if len(username) > 15:
             raise AssertionError('Username must contain 15 characters maximum')
 
@@ -88,9 +85,6 @@ class User(db.Model, BaseModel):
     def validate_email(self, key, email):
         if not email:
             raise AssertionError('No email provided')
-
-        if User.query.filter(User.email == email).first():
-            raise AssertionError('Email already in use')
 
         if not re.match("[^@]+@[^@]+\.[^@]+", email):
             raise AssertionError('Provided email is not a valid email address')
