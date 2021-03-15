@@ -6,13 +6,13 @@ from data.order_data import order_list
 import json
 
 def login(client):
-    # ! Login
     login_data = {"password": "test", "email": "test@test.com"}
     login_response = client.post(
         "/api/login", data=json.dumps(login_data), content_type="application/json"
     )
     assert len(login_response.json["token"]) != 0
     return login_response.json["token"]
+    
 
 def setup_db():
     with app.app_context():

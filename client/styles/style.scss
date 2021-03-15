@@ -1,4 +1,47 @@
+@import "../../node_modules/bulma/bulma.sass";
 .diamond-stage { 
   background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
   // height: 600px;
+
+.newnav {
+  // background-color: aqua;
+  margin: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
+}
+
+.dlheader{
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  color: black;
+}
+
+.menu-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+a .navimg {
+  height: 40px;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+
+.profileIcon {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+input {
+  height: 30px;
+  width: 250px;
+}
+
+label {
+  font-weight: 500;
 }
