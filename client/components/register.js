@@ -47,19 +47,19 @@ export default function Register({ history }) {
             <h1 className="title is-2 has-text-danger">Sign up</h1>
             <div>
               <label>Username: </label>
-              <br/>
-              
-                <input
-                  type="text"
-                  value={formData.username}
-                  onChange={handleChange}
-                  name={'username'}
-                />
-              </div>
-             <div>
+              <br />
+
+              <input
+                type="text"
+                value={formData.username}
+                onChange={handleChange}
+                name={'username'}
+              />
+            </div>
+            <div>
               <div>
                 <label>Email: </label>
-                <br/>
+                <br />
                 <input
                   type="text"
                   value={formData.email}
@@ -70,7 +70,7 @@ export default function Register({ history }) {
             </div>
             <div>
               <label>Password: </label>
-              <br/>
+              <br />
               <input
                 type="password"
                 value={formData.password}
@@ -80,7 +80,7 @@ export default function Register({ history }) {
             </div>
             <div>
               <label>Confirm Password: </label>
-              <br/>
+              <br />
               <input
                 type="text"
                 value={formData.password_confirmation}
@@ -88,11 +88,11 @@ export default function Register({ history }) {
                 name={'password_confirmation'}
               />
             </div>
-            <br/>
+            <br />
             <div>
-            <button className="button is-danger">Sign up!</button>
+              <button className="button is-danger">Sign up!</button>
             </div>
-            
+
             <div>
               <p>{error}</p>
             </div>

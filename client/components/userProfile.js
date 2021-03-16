@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { titleCase } from '../lib/helpers'
 
 
 function Profile() {
@@ -8,6 +8,7 @@ function Profile() {
   const [userData, updateUserData] = useState({})
   const [artist, updateArtist] = useState({})
   const [modal, showModal] = useState(false)
+
   useEffect(() => {
     axios.get('api/profile', { headers: { Authorization: `Bearer ${token}` } })
       .then(resp => updateUserData(resp.data))
@@ -42,67 +43,120 @@ function Profile() {
 
   return <main>
 
-    <section className='section'>
-      <h2 className='subtitle is-4'>My Personal Lineup</h2>
-      {userData.acts.map(act => {
-        return <div className="card" key={act.id}>
-          <div className="card-content is-flex is-justify-content-space-between">
-            <img className="image is-64x64" src={act.image} />
-            <h5 className="title is-4 is-clickable" onClick={event => clickedArtist(event, showModal(!modal))}>{act.artist_name}</h5>
-            <h6 className="is-size-4">{act.set_time}</h6>
-            <h6 className="is-size-4">{act.stage_name}</h6>
-            <button className="button is-danger" onClick={() => saveArtistToUser(act.id)}>Remove</button>
-          </div>
+    {/* Your Personal Line Up */}
+    <section className="section">
+      {/* Title Add Artist ------------ */}
+      <div className="columns is-mobile is-vcentered is-centered">
+        <div className="column is-two-thirds">
+          <h2 className="title is-5">Your Personal Lineup</h2>
         </div>
-      })}
+        <div className="column is-one-third">
+          <Link to={'/lineup'}><button className="button is-success is-small">Add Artists</button></Link>
+        </div>
+      </div>
+      {/* Lineup------------ */}
+      <div className="columns is-mobile is-vcentered is-centered box">
+        <div className="column is-full">
+          {/* headers ------------ */}
+          {userData.acts.length > 0 ?
+            <div className="columns is-mobile is-vcentered is-centered">
+              <div className="column is-half"><h6 className="title is-6 has-text-centered">Artist</h6></div>
+              <div className="column is-one-quarter"><h6 className="title is-6 has-text-centered">Time</h6></div>
+              <div className="column is-one-quarter"><h6 className="title is-6 has-text-centered">Stage</h6></div>
+            </div>
+            : <div>Click {'"Add Artists"'} to start building your personal lineup</div>}
+          {/* line up list------------ */}
+          {userData.acts.map(act => {
+            return <div key={act.id} className="columns is-mobile is-vcentered is-centered">
+              <div className="column is-one-quarter">
+                <figure className="image is-64x64">
+                  <img src={act.image} alt={`picture of ${act.artist_name}`} />
+                </figure>
+              </div>
 
-      <div className={`modal ${modal ? 'is-active' : ''}`}>
-        <div className="modal-background"></div>
-        <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">{artist.artist_name}</p>
-            <button className="delete" aria-label="close" onClick={() => showModal(!modal)}></button>
-          </header>
-          <section className="modal-card-body">
-            <section>
-              <img src={artist.image} />
-              <section>
-                <p>Set time : {artist.set_time}</p>
-                <p>Stage name : {artist.stage_name}</p>
+              <div
+                className="column is-one-quarter has-text-centered has-text-link"
+                onClick={event => clickedArtist(event, showModal(!modal))}>
+                {act.artist_name}</div>
+              <div className="column is-one-quarter has-text-centered">{act.set_time}</div>
+              <div className="column is-one-quarter has-text-centered">{act.stage_name}</div>
+            </div>
+          })}
+          {/* modal------------ */}
+          <div className={`modal ${modal ? 'is-active' : ''}`}>
+            <div className="modal-background"></div>
+            <div className="modal-card">
+              <header className="modal-card-head">
+                <p className="modal-card-title">{artist.artist_name}</p>
+                <button className="delete" aria-label="close" onClick={() => showModal(!modal)}></button>
+              </header>
+              <section className="modal-card-body">
+                <section>
+                  <img src={artist.image} />
+                  <section>
+                    <p>Set time : {artist.set_time}</p>
+                    <p>Stage name : {artist.stage_name}</p>
+                  </section>
+                  <br />
+                  <p>{artist.bio}</p>
+                </section>
               </section>
-              <br />
-              <p>{artist.bio}</p>
-            </section>
-          </section>
-          <footer className="modal-card-foot">
-            <a href={artist.official_website} target="_blank" rel="noreferrer" className="button is-rounded is-success">More artist information</a>
-          </footer>
+              <footer className="modal-card-foot">
+                <a href={artist.official_website} target="_blank" rel="noreferrer" className="button is-rounded is-success">More artist info</a>
+                <button className="button is-rounded button is-danger" onClick={() => saveArtistToUser(artist.id)}>Remove from  list</button>
+              </footer>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section className='section'>
-      <h2 className='subtitle is-4'>My Orders</h2>
+    {/* Your orders section ------------ */}
+    <section className="section">
+      <div className="columns is-mobile is-vcentered is-centered">
+        <div className="column is-full">
+          <h2 className="title is-5">Your Orders</h2>
+        </div>
+      </div>
+      {/* orders ------------ */}
       {userData.orders.map(order => {
-        return <div key={order.id}>
-          <h3 className='subtitle is-5'>Collection Time: {order.act.set_time}</h3>
-          <h4 className='subtitle is-5'>Stage: {order.act.stage_name}</h4>
-          <h4 className='subtitle is-5'>Status: {order.ready_to_collect ? 'Ready to collect' : 'In progress'}</h4>
-          <ul>
-            <label>Order Details</label>
-            {order.products.map(product =>
-              <li key={product.product_name}>{product.product_name}: {`£${product.price}`}</li>
-            )}
-          </ul>
-          <div>
-            <label>Order Total: </label>
-            {`£${order.products.reduce((total, product) => total + product.price, 0)}`}
+        return <div key={order.id} className="box">
+          {/* Order title ------------ */}
+          <div className="columns is-mobile is-vcentered is-centered">
+            <div className="column is-one-third"><h6 className="title is-6 has-text-centered has-text-link">Order #{order.id}</h6></div>
+            <div className="column is-two-third"><h6 className="title is-6 has-text-centered has-text-link">Status: {order.ready_to_collect ? 'Ready to collect' : 'Processing'}</h6></div>
+          </div>
+          {/* Order Details Headers ------------ */}
+          <div className="columns is-mobile is-vcentered is-centered">
+            <div className="column is-one-third has-text-centered">Items</div>
+            <div className="column is-one-third has-text-centered">Qty</div>
+            <div className="column is-one-third has-text-centered">Price</div>
+          </div>
+          {/* Order details ------------ */}
+          {order.products.map(product =>
+            <div key={product.product_name}>
+              <div className="columns is-mobile is-vcentered is-centered">
+                <div className="column is-one-third has-text-centered">{product.product_name}</div>
+                <div className="column is-one-third has-text-centered">1</div>
+                <div className="column is-one-third has-text-centered">{`£${product.price}`}</div>
+              </div>
+            </div>
+          )}
+          {/* Grand total ------------ */}
+          <div className="columns is-mobile is-vcentered is-centered">
+            <div className="column is-one-third has-text-centered has-text-weight-bold">Total</div>
+            <div className="column is-one-third has-text-centered"></div>
+            <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0)}`}</div>
+          </div>
+          {/* Collection ------------ */}
+          <div className="columns is-mobile is-vcentered is-centered">
+            <div className="column is-one-third has-text-centered has-text-weight-bold">Pick Up: </div>
+            <div className="column is-two-third has-text-centered has-text-weight-bold">{order.act.stage_name} Stage</div>
           </div>
         </div>
       })}
     </section>
-
-  </main>
+  </main >
 }
 
 export default Profile

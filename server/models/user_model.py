@@ -1,3 +1,4 @@
+import re
 from app import db, bcrypt
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import *
