@@ -127,7 +127,7 @@ function Profile() {
         </div>
       </div>
       {/* orders ------------ */}
-      {userData.orders > 0 ?
+      {userData.orders.length > 0 ?
         userData.orders.map(order => {
           return <div key={order.id} className="box">
             {/* Order title ------------ */}
@@ -147,7 +147,7 @@ function Profile() {
                 <div className="columns is-mobile is-vcentered is-centered">
                   <div className="column is-one-third has-text-centered">{product.product_name}</div>
                   <div className="column is-one-third has-text-centered">1</div>
-                  <div className="column is-one-third has-text-centered">{`£${product.price}`}</div>
+                  <div className="column is-one-third has-text-centered">{`£${product.price.toFixed(2)}`}</div>
                 </div>
               </div>
             )}
@@ -155,7 +155,7 @@ function Profile() {
             <div className="columns is-mobile is-vcentered is-centered">
               <div className="column is-one-third has-text-centered has-text-weight-bold">Total</div>
               <div className="column is-one-third has-text-centered"></div>
-              <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0)}`}</div>
+              <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0).toFixed(2)}`}</div>
             </div>
             {/* Collection ------------ */}
             <div className="columns is-mobile is-vcentered is-centered">

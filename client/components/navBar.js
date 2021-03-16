@@ -7,7 +7,6 @@ import { Link, withRouter } from 'react-router-dom'
 
 
 const NavBar = ({ history, location }) => {
-  console.log('hello' + location)
   const [user, updateUser] = useState({})
   const token = localStorage.getItem('token')
 
@@ -15,8 +14,6 @@ const NavBar = ({ history, location }) => {
     axios.get('api/profile', { headers: { Authorization: `Bearer ${token}` } })
       .then(resp => updateUser(resp.data))
   }, [])
-  
-  console.log(user.is_admin)
 
 
   function handleLogout() {
@@ -24,8 +21,6 @@ const NavBar = ({ history, location }) => {
     history.push('/lineup')
     updateUser({})
   }
-
-  console.log(localStorage)
 
   const [menu, showMenu] = useState(false)
   // const loggedIn = getLoggedInUserId()
