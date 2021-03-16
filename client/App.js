@@ -8,7 +8,7 @@ import Register from './components/register'
 import LineUp from './components/LineUp'
 import AdminDashboard from './components/adminDashboard'
 import Profile from './components/userProfile'
-
+import Menu from './components/Menu'
 
 
 import 'bulma'
@@ -26,7 +26,7 @@ const App = () => (
       <Route exact path="/lineup" component={LineUp} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/admin" component={AdminDashboard} />
-      {/* <Route exact path="/menu" component={Menu} /> */}
+      <Route exact path="/menu" component={Menu} />
     </Switch>
   </BrowserRouter>
 )

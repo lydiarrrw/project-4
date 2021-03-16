@@ -27,18 +27,26 @@ function Profile() {
     return updateArtist(filteredArtist)
   }
 
-  async function saveArtistToUser(actID) {
+
+  async function refreshProfile() {
     try {
-      await axios.put(`/api/profile/${actID}`, {}, {
-        headers: { Authorization: `Bearer ${token}` }
-      })
+      const { data } = await axios.get('api/profile', { headers: { Authorization: `Bearer ${token}` } })
+      updateUserData(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  async function removeArtist(actID) {
+    try {
+      await axios.put(`/api/profile/${actID}`, {}, { headers: { Authorization: `Bearer ${token}` } })
     } catch (err) {
       console.log(err)
       alert(err.response.data.message)
     }
+    showModal(!modal)
+    refreshProfile()
   }
-
-
 
 
   return <main>
@@ -55,7 +63,7 @@ function Profile() {
         </div>
       </div>
       {/* Lineup------------ */}
-      <div className="columns is-mobile is-vcentered is-centered box">
+      <div className={userData.acts.length > 0 || false ? 'columns is-mobile is-vcentered is-centered box' : 'columns is-mobile is-vcentered is-centered'}>
         <div className="column is-full">
           {/* headers ------------ */}
           {userData.acts.length > 0 ?
@@ -64,7 +72,7 @@ function Profile() {
               <div className="column is-one-quarter"><h6 className="title is-6 has-text-centered">Time</h6></div>
               <div className="column is-one-quarter"><h6 className="title is-6 has-text-centered">Stage</h6></div>
             </div>
-            : <div>Click {'"Add Artists"'} to start building your personal lineup</div>}
+            : <div>Click {'"Add Artists"'} to start building your personal lineup.</div>}
           {/* line up list------------ */}
           {userData.acts.map(act => {
             return <div key={act.id} className="columns is-mobile is-vcentered is-centered">
@@ -103,7 +111,7 @@ function Profile() {
               </section>
               <footer className="modal-card-foot">
                 <a href={artist.official_website} target="_blank" rel="noreferrer" className="button is-rounded is-success">More artist info</a>
-                <button className="button is-rounded button is-danger" onClick={() => saveArtistToUser(artist.id)}>Remove from  list</button>
+                <button className="button is-rounded button is-danger" onClick={() => removeArtist(artist.id)}>Remove from  list</button>
               </footer>
             </div>
           </div>
@@ -119,42 +127,45 @@ function Profile() {
         </div>
       </div>
       {/* orders ------------ */}
-      {userData.orders.map(order => {
-        return <div key={order.id} className="box">
-          {/* Order title ------------ */}
-          <div className="columns is-mobile is-vcentered is-centered">
-            <div className="column is-one-third"><h6 className="title is-6 has-text-centered has-text-link">Order #{order.id}</h6></div>
-            <div className="column is-two-third"><h6 className="title is-6 has-text-centered has-text-link">Status: {order.ready_to_collect ? 'Ready to collect' : 'Processing'}</h6></div>
-          </div>
-          {/* Order Details Headers ------------ */}
-          <div className="columns is-mobile is-vcentered is-centered">
-            <div className="column is-one-third has-text-centered">Items</div>
-            <div className="column is-one-third has-text-centered">Qty</div>
-            <div className="column is-one-third has-text-centered">Price</div>
-          </div>
-          {/* Order details ------------ */}
-          {order.products.map(product =>
-            <div key={product.product_name}>
-              <div className="columns is-mobile is-vcentered is-centered">
-                <div className="column is-one-third has-text-centered">{product.product_name}</div>
-                <div className="column is-one-third has-text-centered">1</div>
-                <div className="column is-one-third has-text-centered">{`£${product.price}`}</div>
-              </div>
+      {userData.orders > 0 ?
+        userData.orders.map(order => {
+          return <div key={order.id} className="box">
+            {/* Order title ------------ */}
+            <div className="columns is-mobile is-vcentered is-centered">
+              <div className="column is-one-third"><h6 className="title is-6 has-text-centered has-text-link">Order #{order.id}</h6></div>
+              <div className="column is-two-third"><h6 className="title is-6 has-text-centered has-text-link">Status: {order.ready_to_collect ? 'Ready to collect' : 'Processing'}</h6></div>
             </div>
-          )}
-          {/* Grand total ------------ */}
-          <div className="columns is-mobile is-vcentered is-centered">
-            <div className="column is-one-third has-text-centered has-text-weight-bold">Total</div>
-            <div className="column is-one-third has-text-centered"></div>
-            <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0)}`}</div>
+            {/* Order Details Headers ------------ */}
+            <div className="columns is-mobile is-vcentered is-centered">
+              <div className="column is-one-third has-text-centered">Items</div>
+              <div className="column is-one-third has-text-centered">Qty</div>
+              <div className="column is-one-third has-text-centered">Price</div>
+            </div>
+            {/* Order details ------------ */}
+            {order.products.map(product =>
+              <div key={product.product_name}>
+                <div className="columns is-mobile is-vcentered is-centered">
+                  <div className="column is-one-third has-text-centered">{product.product_name}</div>
+                  <div className="column is-one-third has-text-centered">1</div>
+                  <div className="column is-one-third has-text-centered">{`£${product.price}`}</div>
+                </div>
+              </div>
+            )}
+            {/* Grand total ------------ */}
+            <div className="columns is-mobile is-vcentered is-centered">
+              <div className="column is-one-third has-text-centered has-text-weight-bold">Total</div>
+              <div className="column is-one-third has-text-centered"></div>
+              <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0)}`}</div>
+            </div>
+            {/* Collection ------------ */}
+            <div className="columns is-mobile is-vcentered is-centered">
+              <div className="column is-one-third has-text-centered has-text-weight-bold">Pick Up: </div>
+              <div className="column is-two-third has-text-centered has-text-weight-bold">{order.act.stage_name} Stage</div>
+            </div>
           </div>
-          {/* Collection ------------ */}
-          <div className="columns is-mobile is-vcentered is-centered">
-            <div className="column is-one-third has-text-centered has-text-weight-bold">Pick Up: </div>
-            <div className="column is-two-third has-text-centered has-text-weight-bold">{order.act.stage_name} Stage</div>
-          </div>
-        </div>
-      })}
+        })
+        : <div>Visit the <Link to={'/menu'}>Order Food & Drinks</Link> page to place your first order.</div>
+      }
     </section>
   </main >
 }
