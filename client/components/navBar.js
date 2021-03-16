@@ -2,8 +2,16 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
+<<<<<<< HEAD
 const NavBar = ({ history }) => {
   const [menu, showMenu] = useState(false)
+=======
+
+
+
+const NavBar = ({ history, location }) => {
+  // console.log('hello' + location)
+>>>>>>> development
   const [user, updateUser] = useState({})
   const token = localStorage.getItem('token')
 
@@ -12,6 +20,7 @@ const NavBar = ({ history }) => {
       .then(resp => updateUser(resp.data))
   }, [])
   
+<<<<<<< HEAD
   //console.log(user.is_admin)
 
 
@@ -26,6 +35,10 @@ const NavBar = ({ history }) => {
     showMenu(!menu)
   }
  
+=======
+  // console.log(user.is_admin)
+
+>>>>>>> development
 
   function handleLogout() {
     localStorage.removeItem('token') // ! This logs you out.
@@ -37,6 +50,10 @@ const NavBar = ({ history }) => {
     showMenu(false)
   }
   
+  // console.log(localStorage)
+
+  const [menu, showMenu] = useState(false)
+  // const loggedIn = getLoggedInUserId()
 
   let nav
 
