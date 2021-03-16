@@ -34,7 +34,7 @@ export default function Register({ history }) {
       if (formData.username === '' || formData.email === '' || formData.password === '' || formData.password_confirmation === '') {
         updateError('All fields are required!')
       } else {
-        updateError('User with this email account is already registered!')
+        updateError('Account already registered')
       }
     }
   }
@@ -82,7 +82,7 @@ export default function Register({ history }) {
               <label>Confirm Password: </label>
               <br />
               <input
-                type="text"
+                type="password"
                 value={formData.password_confirmation}
                 onChange={handleChange}
                 name={'password_confirmation'}
@@ -94,7 +94,7 @@ export default function Register({ history }) {
             </div>
 
             <div>
-              <p>{error}</p>
+              <small>{error}</small>
             </div>
           </form>
         </div>

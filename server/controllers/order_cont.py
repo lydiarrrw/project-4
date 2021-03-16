@@ -48,12 +48,12 @@ def create_an_order(act_id):
 
 
 @router.route("/order/<int:order_id>", methods=["DELETE"])
+@secure_route
 def delete_an_order(order_id):
     order = Order.query.get(order_id)
     if not g.current_user.is_admin:
-        return {'errors': 'This isn\'t your order to delete'}, 402 
+        return {'errors': 'You can\'t do this'}, 402
     order.remove()
-
     return { 'message': 'order removed successfully' }, 200
 
 @router.route("/order/<int:order_id>", methods=["PUT"])

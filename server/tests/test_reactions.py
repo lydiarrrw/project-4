@@ -9,16 +9,15 @@ def test_get_reactions():
     assert response.status_code == 200
 
 def test_make_reaction():
-    # create a client
     client = app.test_client()
-    login ---
+    # login ---
     login_data = {"password":"test", "email":"test@test.com"}
     login_response = client.post('/api/login', data=json.dumps(login_data), content_type="application/json")
     token = login_response.json
     # ---
     assert len(token) !=0
     
-    # token = login(client)
+    # make reaction
     reaction_data = {"reaction_type":"🎉"}
     print(reaction_data)
     request_headers = {"Authorization": f"Bearer {token}"}
