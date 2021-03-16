@@ -12,7 +12,7 @@ export default function AdminDashboard() {
   const [ready, readyToCollect] = useState({
     ready_to_collect: true
   })
-  const [orderReady, updateOrderReady] = useState(false)
+
 
 
   const token = localStorage.getItem('token')
@@ -61,7 +61,7 @@ export default function AdminDashboard() {
   {/* Change order status ------------ */ }
   async function handleStatus(orderid) {
     // readyToCollect({ ready_to_collect: true })
-    updateOrderReady(true)
+    // updateOrderReady(true)
     if (user.is_admin === true) {
       try {
         await axios.put(`/api/order/${orderid}`, ready, {
@@ -74,10 +74,15 @@ export default function AdminDashboard() {
     } else {
       return console.log('nope')
     }
+    refreshOrder()
   }
 
 
-  console.log(orders)
+  function orderReady(orders) {
+    if (orders.ready_to_collect === true) {
+      return true
+    }
+  }
 
   function filterByStage() {
     return orders.filter(order => {
@@ -122,13 +127,19 @@ export default function AdminDashboard() {
         return <div key={order.id} className="box">
           {/* Order title ------------ */}
           <div className="columns is-mobile is-vcentered is-centered">
-            <div className="column is-one-third"><h6 className="title is-5 has-text-centered has-text-link">Order #{order.id}</h6></div>
+            <div className="column is-one-third">
+              {/* <div className={orderReady(order) ? 'ready title is-4' : 'notready'}> */}
+              <h6 className="title is-5 has-text-centered has-text-link">Order #{order.id}</h6>
+              {/* </div> */}
+            </div>
           </div>
           {/* Order buttons ------------ */}
+          <div>
+            <p className={orderReady(order) ? 'ready title is-4' : 'notready'}>Ready for collection</p>
+          </div>
           <div className="orderStatus">
             <button onClick={(event) => handleDelete(order.id)} className="button is-danger">Order collected?</button>
-            <button className="button is-danger" type="button" onClick={(event) => handleStatus(order.id)}>Ready to collect?</button>
-            {/* <p className={orderReady ? 'ready' : 'notready'}>Completed</p> */}
+            <button className={orderReady(order) ? 'notready button is-danger' : 'ready'} type="button" onClick={(event) => handleStatus(order.id)}>Ready to collect?</button>
           </div>
           {/* Order Details Headers ------------ */}
           <div className="columns is-mobile is-vcentered is-centered">

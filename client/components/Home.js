@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import Reactions from '../components/reactions'
 
 function Home() {
   const [acts, updateActs] = useState([])
@@ -18,7 +18,10 @@ function Home() {
 
 
   return <main className='hero is-fullheight'>
+   {/* reaction functionality  */}
+    {Reactions()} 
 
+    
     <h1 className="title has-text-centered">Welcome To Dreamland</h1>
 
 

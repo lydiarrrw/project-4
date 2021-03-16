@@ -127,7 +127,7 @@ function Profile() {
         </div>
       </div>
       {/* orders ------------ */}
-      {userData.orders > 0 ?
+      {userData.orders.length > 0 ?
         userData.orders.map(order => {
           return <div key={order.id} className="box">
             {/* Order title ------------ */}

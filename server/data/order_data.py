@@ -27,8 +27,8 @@ products = [
 
 order_list = [
     Order(user_id = 4, act_id = 1, ready_to_collect = False, products = products),
-    Order(user_id = 4, act_id = 16, ready_to_collect = False, products = products),
+    Order(user_id = 4, act_id = 14, ready_to_collect = False, products = products),
     Order(user_id = 4, act_id = 17, ready_to_collect = False, products = products),
-    Order(user_id = 4, act_id = 23, ready_to_collect = False, products = products),
+    Order(user_id = 4, act_id = 26, ready_to_collect = False, products = products),
     Order(user_id = 4, act_id = 2, ready_to_collect = True, products=products)
 ]
