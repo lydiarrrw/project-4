@@ -56,3 +56,28 @@ def delete_reaction(reaction_id):
     reaction.remove()
     
     return 'You\'ve deleted your reaction', 200
+
+
+
+# ----- UPDATE YOUR REACTION------
+# @router.route("/reactions/<int:reaction_id>", methods=["PUT"])
+# @secure_route
+# def update_reactions(reaction_id):
+
+#     user = g.current_user
+
+
+#     selected_reaction = Reaction.query.get(reaction_id)
+
+#     if not selected_reaction:
+#         return {'message': 'This reaction has not been found'}, 404
+
+#     if selected_reaction in user.reactions:
+#         user.reactions.remove(selected_reaction)
+ 
+#     else:
+#         user.reactions.append(selected_reaction)
+     
+#     user.save()
+
+#     return reaction_schema.jsonify(user), 200

@@ -4,7 +4,7 @@ import axios from 'axios'
 //import { getLoggedInUserId }  from '../lib/auth'
 // import { Link, withRouter } from 'react-router-dom'
 
-export default function AdminDashboard({ history }) {
+export default function AdminDashboard() {
 
   const [orders, updateOrders] = useState([])
   const [stage, updateStage] = useState('Diamond')
@@ -12,9 +12,11 @@ export default function AdminDashboard({ history }) {
   const [ready, readyToCollect] = useState({
     ready_to_collect: true
   })
-  const [orderReady, updateOrderReady] = useState(false)
+
+
 
   const token = localStorage.getItem('token')
+
 
   useEffect(() => {
     async function fetchOrders() {
@@ -30,35 +32,36 @@ export default function AdminDashboard({ history }) {
 
   }, [])
 
+  {/* Refresh orders on the page ------------ */ }
+  async function refreshOrder() {
+    try {
+      const { data } = await axios.get('api/order', { headers: { Authorization: `Bearer ${token}` } })
+      updateOrders(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+  {/* GET User details ------------ */ }
   useEffect(() => {
     axios.get('api/profile', { headers: { Authorization: `Bearer ${token}` } })
       .then(resp => updateUser(resp.data))
   }, [])
 
-  //console.log(user.is_admin)
-
-  // delete an order
+  {/* Change order status ------------ */ }
   async function handleDelete(orderid) {
     await axios.delete(`/api/order/${orderid}`, {
       headers: { Authorization: `Bearer ${token}` }
+
     })
-    
-    history.push('/admin')
+    refreshOrder()
   }
 
-
-  async function handleChange(orderid) {
-    updateOrderReady(true)
-    handleStatus(orderid)
-    
-  }
-
-
-  // change order status
+  {/* Change order status ------------ */ }
   async function handleStatus(orderid) {
-    //console.log(orderid)
-    readyToCollect({ ready_to_collect: true })
-
+    // readyToCollect({ ready_to_collect: true })
+    // updateOrderReady(true)
     if (user.is_admin === true) {
       try {
         await axios.put(`/api/order/${orderid}`, ready, {
@@ -71,14 +74,26 @@ export default function AdminDashboard({ history }) {
     } else {
       return console.log('nope')
     }
+    refreshOrder()
   }
 
 
-  console.log(orders)
-  //console.log(ready)
+  function orderReady(orders) {
+    if (orders.ready_to_collect === true) {
+      return true
+    }
+  }
+
+  function filterByStage() {
+    return orders.filter(order => {
+      return (order.act.stage_name === stage)
+    })
+
+  }
+  console.log(filterByStage())
 
   return <main className="container">
-    <div className="tabs is-toggle is-fullwidth">
+    <section className="tabs is-toggle is-fullwidth">
       <ul onClick={(event) => updateStage(event.target.innerText)}>
         <li className="" >
           <a>
@@ -96,44 +111,67 @@ export default function AdminDashboard({ history }) {
           </a>
         </li>
       </ul>
-    </div>
+    </section>
 
-    <div>
-      {orders.map(order =>
-        <div className="card" key={order.id}>
-          <div className="adminOrders">
 
-            <div className="orderStatus">
-              <button onClick={(event) => handleDelete(order.id)} className="button is-danger">Order collected?</button>
-              <div>
-                
-                  <button className="button is-danger" type="button" onChange={(event) => handleChange(order.id)}>Ready to collect?</button>
-            
-                <p className={orderReady ? 'ready' : 'notready'}>Completed</p>
-              </div>
-            </div>
-            <div className="orderTable">
-              <div>
-                <p className="title is-5">Order No.</p>
-                <p className="subtitle is-3">{order.id}</p>
-              </div>
-              <div>
-                <p className="title is-5">Items</p>
-                <ul>
-                  {order.products.map(product =>
-                    <li className="subtitle is-5" key={product.product_name}>{product.product_name}</li>
-                  )}
-                </ul>
-              </div>
-              <p className="title is-5">No.</p>
-            </div>
-            <div className="adminOrders">
-              <p className="title is-5">Total Price:</p>
+
+    {/* Your orders section ------------ */}
+    <section className="section">
+      <div className="columns is-mobile is-vcentered is-centered">
+        <div className="column is-full">
+          <h2 className="title is-5">Orders</h2>
+        </div>
+      </div>
+      {/* orders ------------ */}
+      {filterByStage().map(order => {
+        return <div key={order.id} className="box">
+          {/* Order title ------------ */}
+          <div className="columns is-mobile is-vcentered is-centered">
+            <div className="column is-one-third">
+              {/* <div className={orderReady(order) ? 'ready title is-4' : 'notready'}> */}
+              <h6 className="title is-5 has-text-centered has-text-link">Order #{order.id}</h6>
+              {/* </div> */}
             </div>
           </div>
+          {/* Order buttons ------------ */}
+          <div>
+            <p className={orderReady(order) ? 'ready title is-4' : 'notready'}>Ready for collection</p>
+          </div>
+          <div className="orderStatus">
+            <button onClick={(event) => handleDelete(order.id)} className="button is-danger">Order collected?</button>
+            <button className={orderReady(order) ? 'notready button is-danger' : 'ready'} type="button" onClick={(event) => handleStatus(order.id)}>Ready to collect?</button>
+          </div>
+          {/* Order Details Headers ------------ */}
+          <div className="columns is-mobile is-vcentered is-centered">
+            <div className="column is-one-third has-text-centered"><strong>Items</strong></div>
+            <div className="column is-one-third has-text-centered"><strong>Qty</strong></div>
+            <div className="column is-one-third has-text-centered"><strong>Price</strong></div>
+          </div>
+          {/* Order details ------------ */}
+          {order.products.map(product =>
+            <div key={product.product_name}>
+              <div className="columns is-mobile is-vcentered is-centered">
+                <div className="column is-one-third has-text-centered">{product.product_name}</div>
+                <div className="column is-one-third has-text-centered">1</div>
+                <div className="column is-one-third has-text-centered">{`£${product.price.toFixed(2)}`}</div>
+              </div>
+            </div>
+          )}
+          {/* Grand total ------------ */}
+          <div className="columns is-mobile is-vcentered is-centered">
+            <div className="column is-one-third has-text-centered has-text-weight-bold">Total</div>
+            <div className="column is-one-third has-text-centered"></div>
+            <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0).toFixed(2)}`}</div>
+          </div>
+          {/* Collection ------------
+          <div className="columns is-mobile is-vcentered is-centered">
+            <div className="column is-one-third has-text-centered has-text-weight-bold">Pick Up: </div>
+            <div className="column is-two-third has-text-centered has-text-weight-bold">{order.act.stage_name} Stage</div>
+          </div> */}
         </div>
-      )}
-    </div>
+      })}
+
+    </section>
 
   </main >
 }

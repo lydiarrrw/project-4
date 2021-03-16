@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-
+import Reactions from '../components/reactions'
 
 function Home() {
   const [acts, updateActs] = useState([])
@@ -58,6 +58,9 @@ function Home() {
 
 
   return <main>
+    {/* reaction functionality  */}
+    {Reactions()}
+
 
     <h1 className="title has-text-centered">Welcome To Dreamland</h1>
 
@@ -101,7 +104,7 @@ function Home() {
         {getNextArtists().includes(undefined) ?
           'The last artists are currently on stage'
           : getNextArtists().map(artist => {
-            return <p key={artist.id}> 
+            return <p key={artist.id}>
               {artist.artist_name}
             </p>
           })}
