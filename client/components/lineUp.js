@@ -47,6 +47,7 @@ export default function LineUp() {
     }
   }
 
+  
   return <main>
     <div className="tabs is-toggle is-fullwidth">
       <ul onClick={(event) => updateStage(event.target.innerText)}>

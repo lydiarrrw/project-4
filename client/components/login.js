@@ -1,7 +1,7 @@
-import React, {useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-export default function LoginPage({ history }){
+export default function LoginPage({ history }) {
   const [formData, updateFormData] = useState({
     email: '',
     password: ''
@@ -28,28 +28,41 @@ export default function LoginPage({ history }){
       console.log(err.response.data)
     }
   }
-  
-  return <form onSubmit={handleSubmit}>
-    <h1 className="title is-2 has-text-danger">Login</h1>
-    <div>
-      <label>Email</label>
-      <input
-        type="text"
-        value={formData.email}
-        onChange={handleChange}
-        name={'email'}
-      />
-    </div>
-    <div>
-      <label>Password</label>
-      <input
-        type="password"
-        value={formData.password}
-        onChange={handleChange}
-        name={'password'}
-      />
-    </div>
-    <button className="button is-danger">Login!</button>
-  </form>
-  
+
+  return <div className="body level">
+    <section className="container level-item">
+      <div className="columns is-half">
+        <div className="columns p-5">
+          <form onSubmit={handleSubmit}>
+            <h1 className="title is-2 has-text-danger">Login</h1>
+            <div>
+              <label>Email</label>
+              <br />
+              <input
+                type="text"
+                value={formData.email}
+                onChange={handleChange}
+                name={'email'}
+              />
+            </div>
+            <div>
+              <label>Password</label>
+              <br />
+              <input
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+                name={'password'}
+              />
+            </div>
+            <br />
+            <div>
+              <button className="button is-danger">Login!</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
 }

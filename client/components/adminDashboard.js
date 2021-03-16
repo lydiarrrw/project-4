@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+// import { getLoggedInUserId } from '../lib/auth'
 //import { getLoggedInUserId }  from '../lib/auth'
 // import { Link, withRouter } from 'react-router-dom'
 
-export default function AdminDashboard() {
+export default function AdminDashboard({ history }) {
+
   const [orders, updateOrders] = useState([])
   const [stage, updateStage] = useState('Diamond')
-  const [acts, updateActs] = useState([])
+  const [user, updateUser] = useState({})
+  const [ready, readyToCollect] = useState({
+    ready_to_collect: true
+  })
+  const [orderReady, updateOrderReady] = useState(false)
 
-
-  //const loggedIn = getLoggedInUserId()
-  //console.log('hello' + loggedIn)
   const token = localStorage.getItem('token')
 
   useEffect(() => {
@@ -18,7 +21,7 @@ export default function AdminDashboard() {
       try {
         const { data } = await axios.get('/api/order', { headers: { Authorization: `Bearer ${token}` } })
         updateOrders(data)
-        updateActs(data)
+
       } catch (err) {
         console.log(err)
       }
@@ -26,14 +29,55 @@ export default function AdminDashboard() {
     fetchOrders()
 
   }, [])
-  console.log(token)
-  
-// delete an order
-// change order status
+
+  useEffect(() => {
+    axios.get('api/profile', { headers: { Authorization: `Bearer ${token}` } })
+      .then(resp => updateUser(resp.data))
+  }, [])
+
+  //console.log(user.is_admin)
+
+  // delete an order
+  async function handleDelete(orderid) {
+    await axios.delete(`/api/order/${orderid}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    
+    history.push('/admin')
+  }
+
+
+  async function handleChange(orderid) {
+    updateOrderReady(true)
+    handleStatus(orderid)
+    
+  }
+
+
+  // change order status
+  async function handleStatus(orderid) {
+    //console.log(orderid)
+    readyToCollect({ ready_to_collect: true })
+
+    if (user.is_admin === true) {
+      try {
+        await axios.put(`/api/order/${orderid}`, ready, {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+        // console.log(ready)
+      } catch (err) {
+        console.log(err)
+      }
+    } else {
+      return console.log('nope')
+    }
+  }
+
 
   console.log(orders)
+  //console.log(ready)
 
-  return <main>
+  return <main className="container">
     <div className="tabs is-toggle is-fullwidth">
       <ul onClick={(event) => updateStage(event.target.innerText)}>
         <li className="" >
@@ -57,17 +101,40 @@ export default function AdminDashboard() {
     <div>
       {orders.map(order =>
         <div className="card" key={order.id}>
-          <p>Delete order</p>
-          <p>Tap for order ready</p>
-          <h5><strong>Order No. </strong>{order.id}</h5>
-          <h6><strong>Products</strong></h6>{order.products.map(product =>
-            <p key={product.product_name}>{product.product_name}</p>
+          <div className="adminOrders">
+
+            <div className="orderStatus">
+              <button onClick={(event) => handleDelete(order.id)} className="button is-danger">Order collected?</button>
+              <div>
+                
+                  <button className="button is-danger" type="button" onChange={(event) => handleChange(order.id)}>Ready to collect?</button>
             
-          )}
-          <p>Quantity:</p>
-          <p>Total Price:</p>
+                <p className={orderReady ? 'ready' : 'notready'}>Completed</p>
+              </div>
+            </div>
+            <div className="orderTable">
+              <div>
+                <p className="title is-5">Order No.</p>
+                <p className="subtitle is-3">{order.id}</p>
+              </div>
+              <div>
+                <p className="title is-5">Items</p>
+                <ul>
+                  {order.products.map(product =>
+                    <li className="subtitle is-5" key={product.product_name}>{product.product_name}</li>
+                  )}
+                </ul>
+              </div>
+              <p className="title is-5">No.</p>
+            </div>
+            <div className="adminOrders">
+              <p className="title is-5">Total Price:</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
+
   </main >
 }
+

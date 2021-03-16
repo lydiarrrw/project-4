@@ -1,8 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 
 function Home() {
+  const [acts, updateActs] = useState([])
+  const [time, updateTime] = useState('')
+  const [upNext, updateUpNext] = useState({})
+  const [liveNow, updateLiveNow] = useState([])
+
+  // const actTime = '10:00'
+
+  // setInterval(() => {
+  //   const currentTime = new Date().toLocaleTimeString().substring(0,5)
+  //   console.log(currentTime)
+  //   console.log(actTime === currentTime)
+  // }, 1000)
+
 
   return <main className='hero is-fullheight'>
 

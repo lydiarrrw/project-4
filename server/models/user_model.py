@@ -1,3 +1,4 @@
+import re
 from app import db, bcrypt
 from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import *
@@ -80,12 +81,12 @@ class User(db.Model, BaseModel):
         return username
 
 
-    @validates('email')
-    def validate_email(self, key, email):
-        if not email:
-            raise AssertionError('No email provided')
+    # @validates('email')
+    # def validate_email(self, key, email):
+    #     if not email:
+    #         raise AssertionError('No email provided')
 
-        if not re.match("[^@]+@[^@]+\.[^@]+", email):
-            raise AssertionError('Provided email is not a valid email address')
+    #     if not re.match("[^@]+@[^@]+\.[^@]+", email):
+    #         raise AssertionError('Provided email is not a valid email address')
 
-        return email
+    #     return email
