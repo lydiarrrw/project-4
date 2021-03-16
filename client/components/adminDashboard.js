@@ -10,7 +10,7 @@ export default function AdminDashboard({ history }) {
   const [stage, updateStage] = useState('Diamond')
   const [user, updateUser] = useState({})
   const [ready, readyToCollect] = useState({
-    ready_to_collect: false
+    ready_to_collect: true
   })
   const [orderReady, updateOrderReady] = useState(false)
 
@@ -107,7 +107,7 @@ export default function AdminDashboard({ history }) {
               <button onClick={(event) => handleDelete(order.id)} className="button is-danger">Order collected?</button>
               <div>
                 
-                  <input type="checkbox" onChange={(event) => handleChange(order.id)} />
+                  <button className="button is-danger" type="button" onChange={(event) => handleChange(order.id)}>Ready to collect?</button>
             
                 <p className={orderReady ? 'ready' : 'notready'}>Completed</p>
               </div>
