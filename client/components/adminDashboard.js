@@ -4,7 +4,7 @@ import axios from 'axios'
 //import { getLoggedInUserId }  from '../lib/auth'
 // import { Link, withRouter } from 'react-router-dom'
 
-export default function AdminDashboard({ history }) {
+export default function AdminDashboard() {
 
   const [orders, updateOrders] = useState([])
   const [stage, updateStage] = useState('Diamond')
@@ -13,7 +13,7 @@ export default function AdminDashboard({ history }) {
     ready_to_collect: true
   })
   const [orderReady, updateOrderReady] = useState(false)
-  const [orderTable, updateOrderTable] = useState(false)
+
 
   const token = localStorage.getItem('token')
 
@@ -32,15 +32,18 @@ export default function AdminDashboard({ history }) {
 
   }, [])
 
-  // async function refreshOrder() {
-  //   try {
-  //     const { data } = await axios.get('api/profile', { headers: { Authorization: `Bearer ${token}` } })
-  //     updateUserData(data)
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
+  {/* Refresh orders on the page ------------ */ }
+  async function refreshOrder() {
+    try {
+      const { data } = await axios.get('api/order', { headers: { Authorization: `Bearer ${token}` } })
+      updateOrders(data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
+
+  {/* GET User details ------------ */ }
   useEffect(() => {
     axios.get('api/profile', { headers: { Authorization: `Bearer ${token}` } })
       .then(resp => updateUser(resp.data))
@@ -50,23 +53,10 @@ export default function AdminDashboard({ history }) {
   async function handleDelete(orderid) {
     await axios.delete(`/api/order/${orderid}`, {
       headers: { Authorization: `Bearer ${token}` }
+
     })
-
+    refreshOrder()
   }
-
-
-  // async function handleChange(orderid) {
-  //   updateOrderReady(true)
-  //   handleStatus(orderid)
-
-  // }
-
-  async function handleOrderDelete(orderid) {
-    updateOrderTable(true)
-    handleDelete(orderid)
-
-  }
-
 
   {/* Change order status ------------ */ }
   async function handleStatus(orderid) {
@@ -136,7 +126,7 @@ export default function AdminDashboard({ history }) {
           </div>
           {/* Order buttons ------------ */}
           <div className="orderStatus">
-            <button onClick={(event) => handleOrderDelete(order.id)} className="button is-danger">Order collected?</button>
+            <button onClick={(event) => handleDelete(order.id)} className="button is-danger">Order collected?</button>
             <button className="button is-danger" type="button" onClick={(event) => handleStatus(order.id)}>Ready to collect?</button>
             {/* <p className={orderReady ? 'ready' : 'notready'}>Completed</p> */}
           </div>
@@ -152,7 +142,7 @@ export default function AdminDashboard({ history }) {
               <div className="columns is-mobile is-vcentered is-centered">
                 <div className="column is-one-third has-text-centered">{product.product_name}</div>
                 <div className="column is-one-third has-text-centered">1</div>
-                <div className="column is-one-third has-text-centered">{`£${product.price}`}</div>
+                <div className="column is-one-third has-text-centered">{`£${product.price.toFixed(2)}`}</div>
               </div>
             </div>
           )}
@@ -160,7 +150,7 @@ export default function AdminDashboard({ history }) {
           <div className="columns is-mobile is-vcentered is-centered">
             <div className="column is-one-third has-text-centered has-text-weight-bold">Total</div>
             <div className="column is-one-third has-text-centered"></div>
-            <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0)}`}</div>
+            <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0).toFixed(2)}`}</div>
           </div>
           {/* Collection ------------
           <div className="columns is-mobile is-vcentered is-centered">
