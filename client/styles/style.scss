@@ -57,21 +57,12 @@ label {
   visibility: hidden;
 }
 
-.orderTable {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
 .orderStatus {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.adminOrders {
-  margin: 15px;
-}
 
 .state .p-success {
   width:100px
