@@ -7,7 +7,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 
 const NavBar = ({ history, location }) => {
-  console.log('hello' + location)
+  // console.log('hello' + location)
   const [user, updateUser] = useState({})
   const token = localStorage.getItem('token')
 
@@ -16,7 +16,7 @@ const NavBar = ({ history, location }) => {
       .then(resp => updateUser(resp.data))
   }, [])
   
-  console.log(user.is_admin)
+  // console.log(user.is_admin)
 
 
   function handleLogout() {
@@ -25,7 +25,7 @@ const NavBar = ({ history, location }) => {
     updateUser({})
   }
 
-  console.log(localStorage)
+  // console.log(localStorage)
 
   const [menu, showMenu] = useState(false)
   // const loggedIn = getLoggedInUserId()
