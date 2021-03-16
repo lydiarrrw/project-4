@@ -32,7 +32,6 @@ export default function Reactions() {
   // ------- GET EMOJIS -----
   const reaction = act.reactions
 
-  console.log(reaction)
 
   const emojis = reaction.map(item => {
     return item.reaction_type
@@ -100,7 +99,6 @@ export default function Reactions() {
     return item.user.id
   })
 
-  console.log(userCheck)
 
 
   function checkReaction() {
@@ -109,8 +107,7 @@ export default function Reactions() {
     }
   }
 
-  console.log(heartsReaction)
-  console.log(reacted)
+
   return <main>
     <p onClick={() => postHeartReaction()}>❤️ {hearts}</p>
 
