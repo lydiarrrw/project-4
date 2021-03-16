@@ -19,7 +19,7 @@ function Home() {
 
   return <main className='hero is-fullheight'>
    {/* reaction functionality  */}
-    {Reactions()} 
+    <Reactions /> 
 
     
     <h1 className="title has-text-centered">Welcome To Dreamland</h1>

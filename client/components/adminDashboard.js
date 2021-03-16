@@ -163,11 +163,7 @@ export default function AdminDashboard() {
             <div className="column is-one-third has-text-centered"></div>
             <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0).toFixed(2)}`}</div>
           </div>
-          {/* Collection ------------
-          <div className="columns is-mobile is-vcentered is-centered">
-            <div className="column is-one-third has-text-centered has-text-weight-bold">Pick Up: </div>
-            <div className="column is-two-third has-text-centered has-text-weight-bold">{order.act.stage_name} Stage</div>
-          </div> */}
+   
         </div>
       })}
 

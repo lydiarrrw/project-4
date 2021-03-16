@@ -71,7 +71,7 @@ const NavBar = ({ history }) => {
         </a>
 
       </div>
-      <Link to={{ pathname: '/' }}><h1 className="dlheader">Dreamland</h1></Link>
+      <Link to={{ pathname: '/' }}><h1 className="dlheader is-danger">Dreamland</h1></Link>
       <Link to={'/profile'} className="profileIcon">
         <img alt="go to profile" src="https://www.flaticon.com/svg/vstatic/svg/64/64572.svg?token=exp=1615638463~hmac=8cc4f0ce5e29703c0653fba7cc57a5cd"></img>
       </Link>
