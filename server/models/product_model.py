@@ -9,4 +9,5 @@ class Product(db.Model, BaseModel):
     product_type = db.Column(db.String(20), nullable =False)
     price = db.Column(db.Float, nullable=False)
     in_stock = db.Column(db.Boolean, nullable=False)
+    image = db.Column(db.Text)
 
