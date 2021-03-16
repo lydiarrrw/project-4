@@ -4,9 +4,7 @@ import axios from 'axios'
 //import { getLoggedInUserId }  from '../lib/auth'
 // import { Link, withRouter } from 'react-router-dom'
 
-export default function AdminDashboard() {
-
-
+export default function AdminDashboard({ history }) {
 
   const [orders, updateOrders] = useState([])
   const [stage, updateStage] = useState('Diamond')
@@ -41,20 +39,26 @@ export default function AdminDashboard() {
 
   // delete an order
   async function handleDelete(orderid) {
-    await axios.put(`/api/order/${orderid}`, ready, {
+    await axios.delete(`/api/order/${orderid}`, {
       headers: { Authorization: `Bearer ${token}` }
     })
+    
     history.push('/admin')
   }
 
 
+  async function handleChange(orderid) {
+    updateOrderReady(true)
+    handleStatus(orderid)
+    
+  }
 
 
   // change order status
   async function handleStatus(orderid) {
     //console.log(orderid)
     readyToCollect({ ready_to_collect: true })
-    // updateOrderReady(true)
+
     if (user.is_admin === true) {
       try {
         await axios.put(`/api/order/${orderid}`, ready, {
@@ -94,20 +98,18 @@ export default function AdminDashboard() {
       </ul>
     </div>
 
-    <div >
+    <div>
       {orders.map(order =>
         <div className="card" key={order.id}>
           <div className="adminOrders">
+
             <div className="orderStatus">
-              <button onClick={(event) => handleDelete(order.id)} className="button is-danger">Delete order</button>
+              <button onClick={(event) => handleDelete(order.id)} className="button is-danger">Order collected?</button>
               <div>
-                <div className="column pretty p-switch p-fill">
-                  <input type="checkbox" onChange={(event) => handleStatus(order.id)} />
-                  <div className="state p-success">
-                    <label>Order Status</label>
-                  </div>
-                </div>
-                <div className={orderReady ? 'ready' : 'notready'}>Completed</div>
+                
+                  <input type="checkbox" onChange={(event) => handleChange(order.id)} />
+            
+                <p className={orderReady ? 'ready' : 'notready'}>Completed</p>
               </div>
             </div>
             <div className="orderTable">
@@ -136,9 +138,3 @@ export default function AdminDashboard() {
   </main >
 }
 
-{/* <div className="column pretty p-switch p-fill">
-<input type="checkbox" onChange={(event) => saveArtistToUser(token, act.id)} />
-<div className="state p-success">
-<label></label>
-</div>
-</div> */}
