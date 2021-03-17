@@ -27,10 +27,6 @@ function Home() {
     updateTime(new Date())
   }, 1000)
 
-  // For testing purpose
-  // const now = new Date()
-  // const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 49)
-
 
   // Formatting the acts set time in time format for use in founctions below
   // And for render on the page
@@ -55,6 +51,7 @@ function Home() {
     }
     return liveArtists
   }
+
 
   function getNextArtists() {
     const filteredActs = mappedActs.filter(act => act.set_time > time)
@@ -96,7 +93,6 @@ function Home() {
     <section className="hero is-small">
       <div className="hero-body glow-subtitle">
         Live now
-        {/* <p className="title is-5">Live now</p> */}
       </div>
     </section>
     {/* List of lives */}
@@ -130,10 +126,15 @@ function Home() {
             <p className="subtitle is-6 has-text-white">{artist.artist_name}</p>
           </div>
 
+
           {/* Reactions */}
           <Reaction actId={artist.id} />
         </section>
       })}
+
+
+
+
     {/* Space */}
     <section className="hero is-small">
       <div className="hero-body">
@@ -143,7 +144,6 @@ function Home() {
     <section className="hero is-small">
       <div className="hero-body glow-subtitle">
         Up next
-        {/* <p className="title is-5">Up Next</p> */}
       </div>
     </section>
     {/* Up Next List */}

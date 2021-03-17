@@ -29,7 +29,6 @@ export default function LineUp() {
   }
 
 
-  console.log(stage)
   function clickedArtist(event) {
     const clickedArtist = event.target.innerText
     const filteredArtist = acts.find(act => {
