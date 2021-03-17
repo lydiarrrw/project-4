@@ -42,7 +42,6 @@ button .is-danger {
   
 }
 
-
 .profileIcon {
   margin-top: 10px;
   margin-right: 10px;
@@ -91,11 +90,7 @@ label {
 #modalButton{
   background:  #515ada;
 }
-#stage{
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('');
-  background-position: center;
-  background-size: cover;
-}
+
 .collection {
   display: flex;
   justify-content: center;
@@ -112,6 +107,15 @@ label {
   background-color: $primary;
 }
 
+#footer {
+  background: black;
+  color: white;
+}
+
+#footerTitle{
+  font-family: 'Pacifico', cursive;
+}
+
 .orderToProcess {
   // background-color: #ff99cc;
   background-color:$danger;
@@ -119,4 +123,57 @@ label {
 
 .regform {
   padding-top: 30px;
+}
+
+.blinking {
+  -webkit-animation: 2s blink ease infinite;
+  -moz-animation: 2s blink ease infinite;
+  -ms-animation: 2s blink ease infinite;
+  -o-animation: 2s blink ease infinite;
+  animation: 2s blink ease infinite;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }

@@ -31,7 +31,7 @@ function Home() {
   // const now = new Date()
   // const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0)
 
-  
+
   // Formatting the acts set time in time format for use in founctions below
   // And for render on the page
   const mappedActs = acts.map(act => {
@@ -105,7 +105,9 @@ function Home() {
     {/* Live Now */}
     <section className="hero is-small">
       <div className="hero-body">
-        <p className="title is-5">Live Now</p>
+        <p className="title is-5 is-flex is-align-items-center">Live Now <span><svg height="100" width="100" className="blinking">
+          <circle cx="50" cy="50" r="10" fill="red" />
+        </svg> </span></p>
       </div>
     </section>
     {/* List of lives */}

@@ -9,6 +9,7 @@ import LineUp from './components/lineUp'
 import AdminDashboard from './components/adminDashboard'
 import Profile from './components/userProfile'
 import Menu from './components/menu'
+import Footer from './components/Footer'
 import 'bulma'
 import './styles/style.scss'
 
@@ -25,6 +26,7 @@ const App = () => (
       <Route exact path="/admin" component={AdminDashboard} />
       <Route exact path="/menu" component={Menu} />
     </Switch>
+    <Footer />
   </BrowserRouter>
 )
 
