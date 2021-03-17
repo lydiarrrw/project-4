@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import Reactions from './reactions'
+import Reaction from './reactions'
 
 function Home() {
   const [acts, updateActs] = useState([])
-  const [time, updateTime] = useState(new Date())
+  // const [time, updateTime] = useState(new Date())
   const [actClicked, updateActClicked] = useState({})
   const [modal, showModal] = useState(false)
 
@@ -23,15 +23,15 @@ function Home() {
   }
 
   // Getting current time in state every second
-  setTimeout(() => {
-    updateTime(new Date())
-  }, 1000)
+  // setTimeout(() => {
+  //   updateTime(new Date())
+  // }, 1000)
 
   // For testing purpose
-  // const now = new Date()
-  // const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0)
+  const now = new Date()
+  const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 49)
 
-  
+
   // Formatting the acts set time in time format for use in founctions below
   // And for render on the page
   const mappedActs = acts.map(act => {
@@ -73,8 +73,6 @@ function Home() {
 
 
   return <main>
-    {/* reaction functionality  */}
-
     {/* Title */}
     <section className="hero is-medium">
       <div className="hero-body">
@@ -138,7 +136,9 @@ function Home() {
             <p className="title is-5 has-text-white">{artist.stage_name} Stage</p>
             <p className="subtitle is-6 has-text-white">{artist.artist_name}</p>
           </div>
-          <Reactions />
+
+          {/* Reactions */}
+          <Reaction actId={artist.id} />
         </section>
       })}
     {/* Space */}
@@ -190,22 +190,23 @@ function Home() {
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">{actClicked.artist_name}</p>
+          <h4 className="modal-card-title has-text-centered has-text-weight-bold">{actClicked.artist_name}</h4>
           <button className="delete" aria-label="close" onClick={() => showModal(!modal)}></button>
         </header>
         <section className="modal-card-body">
           <section>
             <img src={actClicked.image} />
             <section>
-              <p>Set time : {actClicked.set_time}</p>
-              <p>Stage name : {actClicked.stage_name}</p>
+              <p className="has-text-weight-semibold">Set time : {actClicked.set_time}</p>
+              <br />
+              <p className="has-text-weight-semibold">Stage name : {actClicked.stage_name}</p>
             </section>
             <br />
             <p>{actClicked.bio}</p>
           </section>
         </section>
         <footer className="modal-card-foot">
-          <a href={actClicked.official_website} target="_blank" rel="noreferrer" className="button is-rounded is-success">More artist information</a>
+          <a id="modalButton" href={actClicked.official_website} target="_blank" rel="noreferrer" className="button is-rounded has-text-light">More artist information</a>
         </footer>
       </div>
     </div>
