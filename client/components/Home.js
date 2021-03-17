@@ -31,7 +31,7 @@ function Home() {
   // const now = new Date()
   // const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0)
 
-  
+
   // Formatting the acts set time in time format for use in founctions below
   // And for render on the page
   const mappedActs = acts.map(act => {

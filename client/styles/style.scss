@@ -56,7 +56,6 @@ button .is-danger {
   
 }
 
-
 .profileIcon {
   margin-top: 10px;
   margin-right: 10px;
@@ -100,16 +99,13 @@ label {
 }
 
 .modal-card-head{
-  background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
+  background-image: linear-gradient(to right, #b9d1eb, #aec4f9, #b9b1ff, #d698f8, #f876de);
 }
-#modalButton{
-  background:  #515ada;
+#modalButton {
+  background: #f038a1;
 }
-#stage{
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('');
-  background-position: center;
-  background-size: cover;
-}
+
+
 .collection {
   display: flex;
   justify-content: center;
@@ -119,12 +115,20 @@ label {
 .navitem {
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
-  
 }
 
 .orderProcess {
   // background-color: #66ff99;
   background-color: $primary;
+}
+
+#footer {
+  background: black;
+  color: white;
+}
+
+#footerTitle{
+  font-family: 'Pacifico', cursive;
 }
 
 .orderToProcess {
@@ -142,6 +146,58 @@ label {
   padding-top: 30px;
 }
 
+.blinking {
+  -webkit-animation: 2s blink ease infinite;
+  -moz-animation: 2s blink ease infinite;
+  -ms-animation: 2s blink ease infinite;
+  -o-animation: 2s blink ease infinite;
+  animation: 2s blink ease infinite;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
 .regformback {
    background-color: #302929;
    height: 100vh;
