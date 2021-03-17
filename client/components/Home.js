@@ -73,17 +73,9 @@ function Home() {
 
 
   return <main className="home-back">
-    {/* reaction functionality  */}
-
-    {/* Title */}
-    {/* <section className="hero is-medium">
-      <div className="hero-body">
-        <h1 className="title has-text-centered is-4">Welcome To Dreamland</h1>
-      </div>
-    </section> */}
-    {/* View Line Up */}
-    <section className="hero is-medium" id="hero-home">
-      <div className="hero-body">
+     {/* View Line Up */}
+    <section className="hero is-halfheight" id="hero-home">
+      <div className="hero-body ">
         <Link to="/lineup">
           <p className="title is-5 has-text-white">View Line Up</p>
         </Link>

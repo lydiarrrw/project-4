@@ -32,7 +32,6 @@ export default function Reactions() {
   // ------- GET EMOJIS -----
   const reaction = act.reactions
 
-
   const emojis = reaction.map(item => {
     return item.reaction_type
   })
@@ -44,17 +43,9 @@ export default function Reactions() {
     return emojis === '❤️'
   }
 
-  // function getWhoops(emojis) {
-  //   return emojis === '🙌'
-  // }
-
-  // function getStarryEyes(emojis) {
-  //   return emojis === '🤩'
-  // }
 
   const hearts = emojis.filter(getHearts).length
-  // const whoops = emojis.filter(getWhoops).length
-  // const starryeyes = emojis.filter(getStarryEyes).length
+
 
   //---- make reaction ----
   async function postHeartReaction(event) {

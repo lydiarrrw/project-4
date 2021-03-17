@@ -82,14 +82,14 @@ export default function Menu() {
   console.log(basket)
 
   return <main>
-    <div className="tabs is-toggle is-fullwidth mb-2">
+    <div className="tabs is-toggle is-fullwidth mb-2 menuOptions">
       <ul onClick={(event) => updateProductType(event.target.innerText)}>
-        <li className="" >
+        <li className={(productType === 'Food') ? 'is-warning is-active' : 'notactive'} >
           <a>
             <span className="is-mobile-size-4 has-text-weight-bold">Food</span>
           </a>
         </li>
-        <li>
+        <li className={(productType === 'Drinks') ? 'is-warning is-active' : 'notactive'} >
           <a>
             <span className="is-mobile-size-4 has-text-weight-bold">Drinks</span>
           </a>

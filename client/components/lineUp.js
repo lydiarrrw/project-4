@@ -49,19 +49,19 @@ export default function LineUp() {
 
   
   return <main>
-    <div className="tabs is-toggle is-fullwidth mb-2">
+    <div className="tabs is-toggle is-fullwidth mb-2 menuOptions">
       <ul onClick={(event) => updateStage(event.target.innerText)}>
-        <li className="" >
+        <li className={(stage === 'Diamond') ? 'is-warning is-active' : 'notactive'}  >
           <a>
             <span className="is-mobile-size-5 has-text-weight-bold">Diamond</span>
           </a>
         </li>
-        <li>
+        <li className={(stage === 'Lion Ring') ? 'is-active' : 'notactive'} >
           <a>
             <span className="is-mobile-size-5 has-text-weight-bold">Lion Ring</span>
           </a>
         </li>
-        <li >
+        <li className={(stage === 'Fairground') ? 'is-active' : 'notactive'}>
           <a>
             <span className="is-mobile-size-5 has-text-weight-bold">Fairground</span>
           </a>
