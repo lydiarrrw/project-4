@@ -99,6 +99,24 @@ export default function Reactions() {
     return item.user.id
   })
 
+<<<<<<< HEAD
+=======
+  const reactionId = reaction.map(item => {
+    return item.id
+  })
+  // console.log('goodbye' + userCheckId)
+  //console.log('what' + reaction)
+  // console.log(userCheck.includes(currentUser))
+
+  function checking() {
+    if (reactionId.includes(userCheckId)) {
+      return console.log(reaction.id)
+    } else {
+      return console.log('hello 1')
+    }
+  }
+  //console.log(checking())
+>>>>>>> 27c5973fc1351c35261e6fa6bef1e893e7efecdc
 
 
   function checkReaction() {

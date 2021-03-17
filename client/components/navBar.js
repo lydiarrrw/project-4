@@ -55,13 +55,11 @@ const NavBar = ({ history }) => {
         <li>{(user.is_admin === true) && <Link onClick={hideNav} to="/admin" className="navitem">Admin</Link>}</li>
         <li>{!localStorage.getItem('token') && <Link onClick={hideNav} to="/signup" className="navitem">Sign Up</Link>}</li>
         <li>{!localStorage.getItem('token') && <Link onClick={hideNav} to="/login" className="navitem">Login</Link>}</li>
-        <li>{localStorage.getItem('token') && <a onClick={handleLogout} className="navitem">Logout</a>}</li>
+        <li>{localStorage.getItem('token') && <a onClick={handleLogout} className="navitem"><strong>Logout</strong></a>}</li>
         <li></li>
       </ul>
     </div>
   }
-
-
 
   return <nav className="nav-color">
     <div className="newnav">

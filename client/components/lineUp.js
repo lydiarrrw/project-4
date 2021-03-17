@@ -49,33 +49,33 @@ export default function LineUp() {
 
   
   return <main>
-    <div className="tabs is-toggle is-fullwidth">
+    <div className="tabs is-toggle is-fullwidth mb-2">
       <ul onClick={(event) => updateStage(event.target.innerText)}>
         <li className="" >
           <a>
-            <span className="title is-4">Diamond</span>
+            <span className="is-mobile-size-5 has-text-weight-bold">Diamond</span>
           </a>
         </li>
         <li>
           <a>
-            <span className="title is-4">Lion Ring</span>
+            <span className="is-mobile-size-5 has-text-weight-bold">Lion Ring</span>
           </a>
         </li>
         <li >
           <a>
-            <span className="title is-4">Fairground</span>
+            <span className="is-mobile-size-5 has-text-weight-bold">Fairground</span>
           </a>
         </li>
       </ul>
     </div>
-    <img className="stages is-fullwidth" src={stageImage} />
+    <img className="is-fullwidth" src={stageImage} />
     <div className="columns">
       <div className="column">
         <div className="card" >
           <div className="card-content is-flex is-justify-content-space-between column">
-            <div className="column title is-4">Artist</div>
-            <div className="column title is-4">Set Time</div>
-            <div className="column title is-4">Add to your lineup</div>
+            <div className="column is-mobile-size-5 has-text-weight-bold">Artist</div>
+            <div className="column is-mobile-size-5 has-text-weight-bold">Set Time</div>
+            <div className="column is-mobile-size-5 has-text-weight-bold">Add to your lineup</div>
           </div>
         </div>
         {filterByStage().map(act => {
@@ -83,10 +83,10 @@ export default function LineUp() {
             <div className="card-content is-flex is-justify-content-space-between column" key={act.id}>
               <img className="image is-64x64" src={act.image} />
               <div className="column">
-                <h5 className="title is-4 is-clickable" onClick={() => clickedArtist(event, showModal(!modal))}>{act.artist_name}</h5>
+                <h5 className="is-mobile-size-4 has-text-weight-bold" onClick={() => clickedArtist(event, showModal(!modal))}>{act.artist_name}</h5>
               </div>
               <div className="column">
-                <h6 className="is-size-4">{act.set_time}</h6>
+                <h6 className="is-mobile-size-4">{act.set_time}</h6>
               </div>
               <div className="column pretty p-switch p-fill">
                 <input type="checkbox" onChange={(event) => saveArtistToUser(token, act.id)} />
@@ -103,22 +103,23 @@ export default function LineUp() {
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">{artist.artist_name}</p>
+          <h4 className="modal-card-title has-text-centered has-text-weight-bold">{artist.artist_name}</h4>
           <button className="delete" aria-label="close" onClick={() => showModal(!modal)}></button>
         </header>
         <section className="modal-card-body">
           <section>
-            <img src={artist.image} />
+            <img className=""src={artist.image} />
             <section>
-              <p>Set time : {artist.set_time}</p>
-              <p>Stage name : {artist.stage_name}</p>
+              <p className="has-text-weight-semibold">Set time : {artist.set_time}</p>
+              <br />
+              <p className="has-text-weight-semibold">Stage name : {artist.stage_name}</p>
             </section>
             <br />
             <p>{artist.bio}</p>
           </section>
         </section>
         <footer className="modal-card-foot">
-          <a href={artist.official_website} target="_blank" className="button is-rounded is-success">More artist information</a>
+          <a id="modalButton" href={artist.official_website} target="_blank" className="button is-rounded has-text-light">More information</a>
         </footer>
       </div>
     </div>

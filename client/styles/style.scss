@@ -2,12 +2,12 @@
 @import '~pretty-checkbox/src/pretty-checkbox.scss';
 
 
-button .is-danger {
-  background-color: $warning;
+body {
+  font-family: 'Montserrat', sans-serif !important;
 }
-.stages { 
-  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-  // height: 600px;
+
+button .is-danger {
+  background-color: $danger;
 }
 
 .newnav {
@@ -73,7 +73,6 @@ label {
   padding-bottom: 20px;
 }
 
-
 .state .p-success {
   width:100px
 }
@@ -84,6 +83,17 @@ label {
   background-size: cover;
 }
 
+.modal-card-head{
+  background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
+}
+#modalButton{
+  background:  #515ada;
+}
+#stage{
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/Zh2pbwL.jpg');
+  background-position: center;
+  background-size: cover;
+}
 .collection {
   display: flex;
   justify-content: center;
@@ -105,3 +115,6 @@ label {
   background-color:$danger;
 }
 
+.regform {
+  padding-top: 30px;
+}

@@ -72,9 +72,9 @@ fb_list = [
         image="https://bringmedrink.co.uk/app/uploads/2020/06/318828.jpg"
     ),
     Product(
-        product_name="Cheeseburger", 
+        product_name="Cheese Burger", 
         product_type="Food", 
-        price=11.99, 
+        price=8.99, 
         in_stock=True,
         image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHVscGreBJDLz817PuGKamldy06NTHZSdfvA&usqp=CAU"
     ),
@@ -99,13 +99,6 @@ fb_list = [
         in_stock=True,
         image="https://i.pinimg.com/600x315/d3/6b/2b/d36b2b8634e6dfa15eb40fdee2c45b59.jpg"
     ),
-    Product(
-        product_name="Chicken Katsu", 
-        product_type="Food", 
-        price=14.50, 
-        in_stock=True,
-        image="https://www.thespruceeats.com/thmb/aim3qJd5RnSdE68kroJ9r_Ixfbk=/2000x1511/filters:no_upscale():max_bytes(150000):strip_icc()/chicken-katsu-4778466-09-e38cf8d3d6864a9c860034d49e76df25.jpg"
-        ),
     Product(
         product_name="Pizza Margherita", 
         product_type="Food", 
