@@ -99,8 +99,6 @@ export default function Reactions() {
     return item.user.id
   })
 
-<<<<<<< HEAD
-=======
   const reactionId = reaction.map(item => {
     return item.id
   })
@@ -116,7 +114,6 @@ export default function Reactions() {
     }
   }
   //console.log(checking())
->>>>>>> 27c5973fc1351c35261e6fa6bef1e893e7efecdc
 
 
   function checkReaction() {
