@@ -1,8 +1,14 @@
-@import "../../node_modules/bulma/bulma.sass";
+
 @import '~pretty-checkbox/src/pretty-checkbox.scss';
 
-$danger: #f038a1;
-$title: #f038a1;
+$danger: red;
+$primary: #1fc04a;
+$warning:rgb(241, 204, 40);
+
+$tabs-toggle-link-active-background-color: red;
+$navbar-dropdown-background-color: black;
+
+@import "../../node_modules/bulma/bulma.sass";
 
 body {
   font-family: 'Montserrat', sans-serif !important;
@@ -16,32 +22,39 @@ button .is-danger {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #f7f8fa;
+  background-color: #302929;
+  padding-bottom: 15px;
 }
 
 .nav-color {
-  background-color:  #f7f8fa;
+  background-color:  black;
 }
-.dlheader{
-  font-family: 'Pacifico', cursive;
-  font-size: 40px;
-  color: black;
-}
+
 
 .menu-list {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #f7f8fa;
+  background-color: #302929;
+  padding-bottom: 10px;
+}
+
+.navitem:hover {
+  background-color: #fff !important;
+  color: #f038a1!important;
+}
+
+.navmen {
+  color:white !important;
+  font-weight: bold;
 }
 
 .navimg {
   height: 40px;
-  margin: 10px;
+  margin: 15px;
   
 }
-
 
 .profileIcon {
   margin-top: 10px;
@@ -86,20 +99,23 @@ label {
 }
 
 .modal-card-head{
-  background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
+  background-image: linear-gradient(to right, #b9d1eb, #aec4f9, #b9b1ff, #d698f8, #f876de);
 }
-#modalButton{
-  background:  #515ada;
-}
+
 #stage{
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   background-position: center;
   background-size: cover;
 }
+
+#modalButton {
+  background: #f038a1;
+}
+
 .collection {
   display: flex;
   justify-content: center;
-  padding: 10px;
+  padding: 20px;
 }
 
 .navitem {
@@ -112,11 +128,158 @@ label {
   background-color: $primary;
 }
 
+#footer {
+  background: black;
+  color: white;
+}
+
+#footerTitle{
+  font-family: 'Pacifico', cursive;
+}
+
 .orderToProcess {
   // background-color: #ff99cc;
-  background-color:$danger;
+  background-color:$warning;
 }
+
+.ordernotready {
+  // background-color: #ff99cc;
+  background-color:$warning;
+}
+
 
 .regform {
   padding-top: 30px;
+}
+
+.blinking {
+  -webkit-animation: 2s blink ease infinite;
+  -moz-animation: 2s blink ease infinite;
+  -ms-animation: 2s blink ease infinite;
+  -o-animation: 2s blink ease infinite;
+  animation: 2s blink ease infinite;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.regformback {
+   background-color: #302929;
+   height: 100vh;
+   padding-top: 40px;
+}
+
+.glow-nav {
+    font-size: 50px;
+    font-family: 'Pacifico', cursive;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #f038a1, 0 0 20px #f038a1, 0 0 25px #f038a1, 0 0 30px #f038a1, 0 0 35px #f038a1;
+ }
+
+ .glow-subtitle {
+  font-size: 35px;
+  display: flex;
+  justify-content: flex-start;
+  font-family: 'Pacifico', cursive;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 0 1px #fff, 0 0 5px #fff, 0 0 1px #f038a1, 0 0 2px #f038a1, 0 0 5px #f038a1, 0 0 10px #f038a1, 0 0 15px #f038a1;
+}
+
+.submitForm {
+  font-size: 25px;
+  text-align: center;
+  background-color: #302929;
+  font-family: 'Montserrat', sans-serif;  
+  color: #fff;
+  // border-style: none;
+  border-color: #fff;
+  border-radius: 8px;
+  padding: 7px;
+  font-weight: bold;
+}
+
+label {
+  color:  #fff !important;
+}
+
+.loginbutton {
+  display: flex;
+  justify-content: center;
+}
+
+:focus {
+  outline: none !important;
+  border:1px solid #f038a1;
+  box-shadow: 0 0 10px #f038a1;
+}
+
+.menuOptions{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px; 
+}
+
+.home-back {
+  background-color: #302929;
+}
+
+
+.tabs.is-toggle li.is-active a {
+  background-color: #f038a1 !important;
+  border-color: #f038a1 !important;
+}
+
+
+.alignerror {
+ color: #fff;
+ display: flex;
+ justify-content:center;
+ padding-top: 8px;
+}
+
+.footerLink {
+  color: #f038a1;
 }

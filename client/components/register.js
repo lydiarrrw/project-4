@@ -32,20 +32,19 @@ export default function Register({ history }) {
     } catch (err) {
       console.log(err.response.data._message)
       if (formData.username === '' || formData.email === '' || formData.password === '' || formData.password_confirmation === '') {
-        updateError('All fields are required!')
+        updateError('All fields are required')
       } else {
-        updateError('Account already registered')
+        updateError('Please try again')
       }
     }
   }
 
-  return <div className="body level">
+  return <div className="body level regformback">
     <section className="container level-item regform">
       <div className="columns is-half">
         <div className="columns p-5">
           <form onSubmit={handleSubmit}>
-            <h1 className="title is-2 has-text-danger">Sign up</h1>
-            <div>
+                    <div>
               <label>Username: </label>
               <br />
 
@@ -89,11 +88,11 @@ export default function Register({ history }) {
               />
             </div>
             <br />
-            <div>
-              <button className="button is-danger">Sign up!</button>
+            <div className="loginbutton">
+              <button className="submitForm">Sign up</button>
             </div>
 
-            <div>
+            <div className="alignerror">
               <small>{error}</small>
             </div>
           </form>

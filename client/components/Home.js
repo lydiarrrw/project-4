@@ -5,7 +5,7 @@ import Reaction from './reactions'
 
 function Home() {
   const [acts, updateActs] = useState([])
-  // const [time, updateTime] = useState(new Date())
+  const [time, updateTime] = useState(new Date())
   const [actClicked, updateActClicked] = useState({})
   const [modal, showModal] = useState(false)
 
@@ -23,13 +23,13 @@ function Home() {
   }
 
   // Getting current time in state every second
-  // setTimeout(() => {
-  //   updateTime(new Date())
-  // }, 1000)
+  setTimeout(() => {
+    updateTime(new Date())
+  }, 1000)
 
   // For testing purpose
-  const now = new Date()
-  const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 49)
+  // const now = new Date()
+  // const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 49)
 
 
   // Formatting the acts set time in time format for use in founctions below
@@ -70,18 +70,10 @@ function Home() {
     updateActClicked(act)
   }
 
-
-
-  return <main>
-    {/* Title */}
-    <section className="hero is-medium">
-      <div className="hero-body">
-        <h1 className="title has-text-centered is-4">Welcome To Dreamland</h1>
-      </div>
-    </section>
+  return <main className="home-back">
     {/* View Line Up */}
-    <section className="hero is-medium" id="hero-home">
-      <div className="hero-body">
+    <section className="hero is-halfheight" id="hero-home">
+      <div className="hero-body ">
         <Link to="/lineup">
           <p className="title is-5 has-text-white">View Line Up</p>
         </Link>
@@ -102,8 +94,9 @@ function Home() {
     </section>
     {/* Live Now */}
     <section className="hero is-small">
-      <div className="hero-body">
-        <p className="title is-5">Live Now</p>
+      <div className="hero-body glow-subtitle">
+        Live now
+        {/* <p className="title is-5">Live now</p> */}
       </div>
     </section>
     {/* List of lives */}
@@ -148,8 +141,9 @@ function Home() {
     </section>
     {/* Up Next */}
     <section className="hero is-small">
-      <div className="hero-body">
-        <p className="title is-5">Up Next</p>
+      <div className="hero-body glow-subtitle">
+        Up next
+        {/* <p className="title is-5">Up Next</p> */}
       </div>
     </section>
     {/* Up Next List */}

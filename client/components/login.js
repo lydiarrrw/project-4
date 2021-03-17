@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 export default function LoginPage({ history }) {
@@ -6,9 +6,8 @@ export default function LoginPage({ history }) {
     email: '',
     password: ''
   })
-
-  console.log(formData)
-
+  const [error, updateError] = useState('')
+ 
   function handleChange(event) {
     const { name, value } = event.target
     updateFormData({ ...formData, [name]: value })
@@ -26,15 +25,19 @@ export default function LoginPage({ history }) {
       history.push('/')
     } catch (err) {
       console.log(err.response.data)
+      if (formData.email === '' || formData.password === '') {
+        updateError('All fields are required')
+      } else {
+        updateError('Login details incorrect')
+      }
     }
   }
 
-  return <div className="body level">
+  return <div className="body level regformback">
     <section className="container level-item regform">
       <div className="columns is-half">
-        <div className="columns p-5">
+        <div className="columns p-5 ">
           <form onSubmit={handleSubmit}>
-            <h1 className="title is-2 has-text-danger">Login</h1>
             <div>
               <label>Email</label>
               <br />
@@ -56,8 +59,11 @@ export default function LoginPage({ history }) {
               />
             </div>
             <br />
-            <div>
-              <button className="button is-danger">Login!</button>
+            <div className="loginbutton">
+              <button className="submitForm">Login</button>
+            </div>
+            <div className="alignerror">
+              <small>{error}</small>
             </div>
           </form>
         </div>

@@ -90,24 +90,26 @@ export default function AdminDashboard() {
     })
 
   }
-  console.log(filterByStage())
+  //console.log(stage)
 
   return <main className="container">
-    <section className="tabs is-toggle is-fullwidth">
+ 
+    <section className="tabs is-toggle is-fullwidth menuOptions">
       <ul onClick={(event) => updateStage(event.target.innerText)}>
-        <li className="" >
+        <li className={(stage === 'Diamond') ? 'is-warning is-active' : 'notactive'} >
           <a>
-            <span className="title is-4">Diamond</span>
+            <span className="is-mobile-size-5 has-text-weight-bold">Diamond</span>
+            
           </a>
         </li>
-        <li>
+        <li className={(stage === 'Lion Ring') ? 'is-active' : 'notactive'} >
           <a>
-            <span className="title is-4">Lion Ring</span>
+            <span className="is-mobile-size-5 has-text-weight-bold">Lion Ring</span>
           </a>
         </li>
-        <li >
+        <li className={(stage === 'Fairground') ? 'is-active' : 'notactive'}>
           <a>
-            <span className="title is-4">Fairground</span>
+            <span className="is-mobile-size-5 has-text-weight-bold">Fairground</span>
           </a>
         </li>
       </ul>
@@ -161,7 +163,7 @@ export default function AdminDashboard() {
           </div>
           <div className="orderStatus">
             <button onClick={(event) => handleDelete(order.id)} className={orderReady(order) ? 'ready button  is-warning' : 'notready'}>Collected?</button>
-            <button className={orderReady(order) ? 'notready' : 'ready button  is-primary'} type="button" onClick={(event) => handleStatus(order.id)}>Ready to collect?</button>
+            <button className={orderReady(order) ? 'notready' : 'ready button  is-warning'} type="button" onClick={(event) => handleStatus(order.id)}>Ready to collect?</button>
           </div>
         </div>
       })}

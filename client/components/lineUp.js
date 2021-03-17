@@ -28,6 +28,8 @@ export default function LineUp() {
     })
   }
 
+
+  console.log(stage)
   function clickedArtist(event) {
     const clickedArtist = event.target.innerText
     const filteredArtist = acts.find(act => {
@@ -47,28 +49,41 @@ export default function LineUp() {
     }
   }
 
-  
+
   return <main>
-    <div className="tabs is-toggle is-fullwidth mb-2">
+    <div className="tabs is-toggle is-fullwidth mb-2 menuOptions">
       <ul onClick={(event) => updateStage(event.target.innerText)}>
-        <li className="" >
+        <li className={(stage === 'Diamond') ? 'is-warning is-active' : 'notactive'}  >
           <a>
             <span className="is-mobile-size-5 has-text-weight-bold">Diamond</span>
           </a>
         </li>
-        <li>
+        <li className={(stage === 'Lion Ring') ? 'is-active' : 'notactive'} >
           <a>
             <span className="is-mobile-size-5 has-text-weight-bold">Lion Ring</span>
           </a>
         </li>
-        <li >
+        <li className={(stage === 'Fairground') ? 'is-active' : 'notactive'}>
           <a>
             <span className="is-mobile-size-5 has-text-weight-bold">Fairground</span>
           </a>
         </li>
       </ul>
     </div>
-    <img className="is-fullwidth" src={stageImage} />
+    <section
+      className="hero is-halfheight"
+      style={{
+        background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${stageImage})`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover'
+      }}>
+      <div className="hero-body">
+        <div className="">
+          <p className="title has-text-white">Line Up</p>
+          <p className="subtitle has-text-white">Explore all artists</p>
+        </div>
+      </div>
+    </section>
     <div className="columns">
       <div className="column">
         <div className="card" >
@@ -99,6 +114,7 @@ export default function LineUp() {
         })}
       </div>
     </div>
+    {/* Artist info */}
     <div className={`modal ${modal ? 'is-active' : ''}`}>
       <div className="modal-background"></div>
       <div className="modal-card">
@@ -108,7 +124,7 @@ export default function LineUp() {
         </header>
         <section className="modal-card-body">
           <section>
-            <img className=""src={artist.image} />
+            <img className="" src={artist.image} />
             <section>
               <p className="has-text-weight-semibold">Set time : {artist.set_time}</p>
               <br />
