@@ -55,14 +55,8 @@ export default function Menu() {
   }
   console.log(`products array contains: ${products}`)
 
-  //create a basket triggered by onclick create basket
-  //render a dropdown or modal showing basket contents
 
-
-  //submit an order triggered by button 
   async function submitUserOrder(token, actID, products) {
-    console.log(`INSIDE actID is: ${actID} and products array contains: ${products}`)
-    // console.log(`INSIDE ${token}`)
     try {
       await axios.post(`/api/order/${actID}`, { products: products }, {
         headers: { Authorization: `Bearer ${token}` }
@@ -88,48 +82,59 @@ export default function Menu() {
   console.log(basket)
 
   return <main>
-    <div className="tabs is-toggle is-fullwidth">
+    <div className="tabs is-toggle is-fullwidth mb-2">
       <ul onClick={(event) => updateProductType(event.target.innerText)}>
         <li className="" >
           <a>
-            <span className="title is-5">Food</span>
+            <span className="is-mobile-size-4 has-text-weight-bold">Food</span>
           </a>
         </li>
         <li>
           <a>
-            <span className="title is-5">Drinks</span>
+            <span className="is-mobile-size-4 has-text-weight-bold">Drinks</span>
           </a>
         </li>
       </ul>
     </div>
-    <img className="is-fullwidth" src="https://www.austinchronicle.com/binary/4f1d/27023542_327502024412463_2334521810091458092_o.jpg" />
+    <img id="hero-home" src="https://www.austinchronicle.com/binary/4f1d/27023542_327502024412463_2334521810091458092_o.jpg" />
+    <div className="card" >
+      <div className="card-content is-flex is-justify-content-space-between column pt-0 pb-0">
+        <div className="column is-mobile-size-5 has-text-weight-bold">Product</div>
+        <div className="column is-mobile-size-5 has-text-weight-bold">Price</div>
+        <div className="column is-mobile-size-5 has-text-weight-bold">Add to basket</div>
+      </div>
+    </div>
     <div>
       {filterByProduct().map(product => {
         return <div className="card" key={product.id}>
-          <div className="card-content is-flex is-justify-content-space-between column" key={product.id}>
-            <img className="image is-64x64" src={product.image} />
+          <div className="card-content is-flex is-justify-content-space-between column " key={product.id}>
+            <img className="image is-64x64 is-fullwidth is-vcentered is-centered" src={product.image} />
             <div className="column">
-              <h5 className="is-mobile-size-4">{product.product_name}</h5>
+              <h5 className="is-mobile-size-4 is-vcentered is-centered has-text-weight-bold">{product.product_name}</h5>
             </div>
             <div className="column">
-              <h5 className="is-mobile-size-4">£{product.price.toFixed(2)}</h5>
+              <h5 className="is-mobile-size-4 is-vcentered is-centered">£{product.price.toFixed(2)}</h5>
             </div>
             <div className="column">
-              <button onClick={(event) => addToProducts(product.id)} className="button is-primary">Add</button>
+              <button onClick={(event) => addToProducts(product.id)} className="button is-primary is-vcentered is-centered">Add</button>
             </div>
           </div>
         </div>
       })}
     </div>
-    <section className="columns is-flex is-justify-content-space-between">
+    <section className="columns card is-flex is-justify-content-space-between">
       <label className="column is-one-third is-mobile-size-4">Collection point</label>
-      <select className="column is-one-third is-mobile-size-4"onChange={(event) => getActId(event.target)} >
+      <select className="column is-one-third is-mobile-size-4" onChange={(event) => getActId(event.target)} >
         {acts.map(act => {
           return <option key={act.id} value={act.id}>{act.artist_name}: {act.set_time}</option>
         })}
       </select>
-      <button onClick={() => displayBasket()} className="column is-one-third button is-rounded is-danger">Create a Basket</button>
     </section>
+    <section className="card">
+    <button className="button is-rounded is-danger" onClick={() => displayBasket()}>Create Order</button>
+    </section>
+
+    {/* View basket modal */}
     <div className={`modal ${modal ? 'is-active' : ''}`}>
       <div className="modal-background"></div>
       <div className="modal-card">

@@ -1,10 +1,9 @@
 @import "../../node_modules/bulma/bulma.sass";
 @import '~pretty-checkbox/src/pretty-checkbox.scss';
 
-.stages { 
-  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-  // height: 600px;
-}
+// *{
+//   font-family: 'Open Sans', sans-serif;
+// }
 
 .newnav {
   margin: 7px;
@@ -63,12 +62,23 @@ label {
   justify-content: space-between;
 }
 
-
 .state .p-success {
   width:100px
 }
 
 #food-drinks-home{
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/Zh2pbwL.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.modal-card-head{
+  background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
+}
+#modalButton{
+  background:  #515ada;
+}
+#stage{
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/Zh2pbwL.jpg');
   background-position: center;
   background-size: cover;

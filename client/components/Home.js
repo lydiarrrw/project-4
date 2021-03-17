@@ -59,7 +59,7 @@ function Home() {
 
   return <main>
     {/* reaction functionality  */}
-    {Reactions()}
+    <Reactions />
 
 
     <h1 className="title has-text-centered">Welcome To Dreamland</h1>
