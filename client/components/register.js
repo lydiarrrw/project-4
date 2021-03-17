@@ -32,9 +32,9 @@ export default function Register({ history }) {
     } catch (err) {
       console.log(err.response.data._message)
       if (formData.username === '' || formData.email === '' || formData.password === '' || formData.password_confirmation === '') {
-        updateError('All fields are required!')
+        updateError('All fields are required')
       } else {
-        updateError('Account already registered')
+        updateError('Please try again')
       }
     }
   }
@@ -92,7 +92,7 @@ export default function Register({ history }) {
               <button className="submitForm">Sign up</button>
             </div>
 
-            <div>
+            <div className="alignerror">
               <small>{error}</small>
             </div>
           </form>
