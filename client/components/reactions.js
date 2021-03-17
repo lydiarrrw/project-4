@@ -99,17 +99,17 @@ export default function Reactions({ match }) {
     return item.id
   })
   // console.log('goodbye' + userCheckId)
-  console.log('what' + reaction)
+  //console.log('what' + reaction)
   // console.log(userCheck.includes(currentUser))
 
   function checking() {
     if (reactionId.includes(userCheckId)) {
       return console.log(reaction.id)
     } else {
-      return console.log('hello')
+      return console.log('hello 1')
     }
   }
-  console.log(checking())
+  //console.log(checking())
 
 
   // ----- COMPARE REACTION -----

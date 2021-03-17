@@ -40,7 +40,7 @@ export default function Register({ history }) {
   }
 
   return <div className="body level">
-    <section className="container level-item">
+    <section className="container level-item regform">
       <div className="columns is-half">
         <div className="columns p-5">
           <form onSubmit={handleSubmit}>

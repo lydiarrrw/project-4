@@ -2,8 +2,12 @@
 @import '~pretty-checkbox/src/pretty-checkbox.scss';
 
 
+body {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
 button .is-danger {
-  background-color: $warning;
+  background-color: $danger;
 }
 .stages { 
   background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -105,3 +109,6 @@ label {
   background-color:$danger;
 }
 
+.regform {
+  padding-top: 30px;
+}
