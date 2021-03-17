@@ -5,7 +5,7 @@ import Reactions from './reactions'
 
 function Home() {
   const [acts, updateActs] = useState([])
-  // const [time, updateTime] = useState(new Date())
+  const [time, updateTime] = useState(new Date())
   const [actClicked, updateActClicked] = useState({})
   const [modal, showModal] = useState(false)
 
@@ -23,13 +23,15 @@ function Home() {
   }
 
   // Getting current time in state every second
-  // setTimeout(() => {
-  //   updateTime(new Date())
-  // }, 1000)
+  setTimeout(() => {
+    updateTime(new Date())
+  }, 1000)
 
-  const now = new Date()
-  const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0)
+  // For testing purpose
+  // const now = new Date()
+  // const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0)
 
+  
   // Formatting the acts set time in time format for use in founctions below
   // And for render on the page
   const mappedActs = acts.map(act => {

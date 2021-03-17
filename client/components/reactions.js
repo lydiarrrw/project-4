@@ -108,32 +108,38 @@ export default function Reactions() {
   }
 
 
-  return <div className="columns is-mobile is-centred is-vcentered">
-    <div className="column is-narrow">
-      <div className="columns is-mobile is-centred is-vcentered is-variable is-2">
+  return <div className="columns is-mobile">
+    <div className="column">
+      <div className="columns is-mobile">
         <div className="column">
-
-
-          <div className="columns is-mobile is-centred is-vcentered is-variable is-2">
-            <div className="column is half" onClick={(event) => postHeartReaction(event)}>❤️</div>
-            <div className="column is half" onClick={(event) => postHeartReaction(event)}>❤️</div>
-          </div>
-
-
-
-          <span className="has-text-white has-text-centered" onClick={(event) => postHeartReaction(event)}>❤️<span className="pl-3">{hearts}</span></span>
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">❤️</span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
         </div>
         <div className="column">
-          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}><span className="has-text-white">🔥 {hearts}</span></p>
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">🔥 </span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
         </div>
         <div className="column">
-          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}><span className="has-text-white">🙌 {hearts}</span></p>
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">🙌 </span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
         </div>
         <div className="column">
-          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}><span className="has-text-white">🎉 {hearts}</span></p>
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">🎉</span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
         </div>
         <div className="column">
-          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}><span className="has-text-white">🤩 {hearts}</span></p>
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">🤩</span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
         </div>
       </div>
     </div>
