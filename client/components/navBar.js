@@ -11,7 +11,7 @@ const NavBar = ({ history }) => {
     axios.get('api/profile', { headers: { Authorization: `Bearer ${token}` } })
       .then(resp => updateUser(resp.data))
   }, [])
-  
+
   //console.log(user.is_admin)
 
 
@@ -25,7 +25,7 @@ const NavBar = ({ history }) => {
     }
     showMenu(!menu)
   }
- 
+
   // console.log(user.is_admin)
 
 
@@ -38,10 +38,10 @@ const NavBar = ({ history }) => {
   function hideNav() {
     showMenu(false)
   }
-  
+
   // console.log(localStorage)
 
-  
+
   // const loggedIn = getLoggedInUserId()
 
   let nav
@@ -50,11 +50,11 @@ const NavBar = ({ history }) => {
     nav = <div>
       <ul className="menu-list">
         <li></li>
-        <li>{localStorage.getItem('token') && <p><Link onClick={hideNav} to="/lineup" className="navitem">Acts</Link></p>}</li>      
+        <li>{localStorage.getItem('token') && <p><Link onClick={hideNav} to="/lineup" className="navitem">Acts</Link></p>}</li>
         <li>{localStorage.getItem('token') && <Link onClick={hideNav} to="/menu" className="navitem">Menu</Link>}</li>
         <li>{(user.is_admin === true) && <Link onClick={hideNav} to="/admin" className="navitem">Admin</Link>}</li>
         <li>{!localStorage.getItem('token') && <Link onClick={hideNav} to="/signup" className="navitem">Sign Up</Link>}</li>
-        <li>{!localStorage.getItem('token') && <Link  onClick={hideNav} to="/login" className="navitem">Login</Link>}</li>
+        <li>{!localStorage.getItem('token') && <Link onClick={hideNav} to="/login" className="navitem">Login</Link>}</li>
         <li>{localStorage.getItem('token') && <a onClick={handleLogout} className="navitem">Logout</a>}</li>
         <li></li>
       </ul>
@@ -65,15 +65,15 @@ const NavBar = ({ history }) => {
 
   return <nav className="nav-color">
     <div className="newnav">
-      <div>
-        <a role="button" onClick={() => refreshNavBar() }>
-          <img src="https://i.imgur.com/m4LDivk.png" alt="navigation menu" className="navimg" ></img>
-        </a>
 
-      </div>
+      <a role="button" onClick={() => refreshNavBar()}>
+        <img src="https://i.imgur.com/m4LDivk.png" alt="navigation menu" className="navimg" ></img>
+      </a>
+
+
       <Link to={{ pathname: '/' }}><h1 className="dlheader">Dreamland</h1></Link>
-      <Link to={'/profile'} className="profileIcon">
-        <img alt="go to profile" className="profilelogo" src="https://i.imgur.com/9kDNNQo.png"></img>
+      <Link to={'/profile'} >
+        <img alt="go to profile" className="navimg" src="https://i.imgur.com/9kDNNQo.png"></img>
       </Link>
     </div>
     <div>{nav}</div>

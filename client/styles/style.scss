@@ -34,10 +34,10 @@ button .is-danger {
   background-color: #f7f8fa;
 }
 
-a .navimg {
+.navimg {
   height: 40px;
-  margin-top: 10px;
-  margin-left: 10px;
+  margin: 10px;
+  
 }
 
 
@@ -88,10 +88,6 @@ label {
   display: flex;
   justify-content: center;
   padding: 10px;
-}
-
-.profilelogo{
-  height: 50px;
 }
 
 .navitem {
