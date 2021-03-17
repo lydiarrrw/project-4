@@ -127,17 +127,14 @@ export default function AdminDashboard() {
         return <div key={order.id} className="box">
           {/* Order title ------------ */}
           <div className={orderReady(order) ? 'columns is-mobile is-vcentered is-centered orderProcess' : 'columns is-mobile is-vcentered is-centered orderToProcess'}>
-          
             <div className="column is-one-third">
-              {/* <div className={orderReady(order) ? 'ready title is-4' : 'notready'}> */}
               <h6 className="title is-5 has-text-centered">Order #{order.id}</h6>
-              {/* </div> */}
             </div>
           </div>
+          
           {/* Order buttons ------------ */}
           <div className="collection">
             <p className={orderReady(order) ? 'ready title is-4' : 'notready'}>Ready for collection</p>
-            {/* <p className={orderReady(order) ? 'notready' : 'ready title is-4' }>Processing</p> */}
           </div>
 
           {/* Order Details Headers ------------ */}
