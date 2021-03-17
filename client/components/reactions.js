@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { getLoggedInUserId } from '../lib/auth'
 
-export default function Reactions() {
+export default function Reactions({ match }) {
 
+// const id = match.params.actid
+
+  const currentUser = getLoggedInUserId()
   const [heartsReaction, updateHeartsReaction] = useState({
     reaction_type: '❤️'
   })
   const [act, updateAct] = useState([])
   const [reacted, updatedReacted] = useState(true)
+
+  // const [userData, updateUserData] = useState({})
   const token = localStorage.getItem('token')
 
-
+// `api/acts/${id}`
+  // ------- GET ACTS-----
   useEffect(() => {
     axios.get('api/acts/3', { headers: { Authorization: `Bearer ${token}` } })
       .then(resp => updateAct(resp.data))
@@ -21,6 +28,7 @@ export default function Reactions() {
     return <h1>loading</h1>
   }
 
+  // ------- REFRESH REACTIONS -----
   async function refreshReactions() {
     try {
       const { data } = await axios.get('api/acts/3', { headers: { Authorization: `Bearer ${token}` } })
@@ -29,10 +37,12 @@ export default function Reactions() {
       console.log(err)
     }
   }
+
+
   // ------- GET EMOJIS -----
   const reaction = act.reactions
 
-  console.log(reaction)
+
 
   const emojis = reaction.map(item => {
     return item.reaction_type
@@ -57,11 +67,11 @@ export default function Reactions() {
   // const whoops = emojis.filter(getWhoops).length
   // const starryeyes = emojis.filter(getStarryEyes).length
 
-  //---- make reaction ----
-  async function postHeartReaction() {
+  //---- MAKE REACTION ----
+  async function postHeartReaction(actid) {
 
     try {
-      await axios.post('/api/reactions/3', heartsReaction, {
+      await axios.post(`/api/reactions/${actid}`, heartsReaction, {
         headers: { Authorization: `Bearer ${token}` }
       })
 
@@ -70,52 +80,55 @@ export default function Reactions() {
     }
     refreshReactions()
     updatedReacted(false)
-    checkReaction()
+
   }
 
-  //---- make reaction ----
-  // async function updateHeartReaction() {
-
-  //   try {
-  //     await axios.put('/api/reactions/1', heartsReaction, {
-  //       headers: { Authorization: `Bearer ${token}` }
-  //     })
-
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  //   refreshReactions()
-  // }
-
-  // ----- delete reaction -----
-  async function deleteHeartReaction() {
-    await axios.delete('/api/reactions/1', {
+  // ----- DELETE REACTION -----
+  async function deleteHeartReaction(reactionid) {
+    await axios.delete(`/api/reactions/${reactionid}`, {
       headers: { Authorization: `Bearer ${token}` }
 
     })
     refreshReactions()
   }
-
-  const userCheck = reaction.map(item => {
+  const userCheckId = reaction.map(item => {
     return item.user.id
   })
 
-  console.log(userCheck)
+  const reactionId = reaction.map(item => {
+    return item.id
+  })
+  // console.log('goodbye' + userCheckId)
+  console.log('what' + reaction)
+  // console.log(userCheck.includes(currentUser))
 
-
-  function checkReaction() {
-    if (userCheck.includes(4)) {
+  function checking() {
+    if (reactionId.includes(userCheckId)) {
+      return console.log(reaction.id)
+    } else {
       return console.log('hello')
     }
   }
+  console.log(checking())
 
-  console.log(heartsReaction)
-  console.log(reacted)
+
+  // ----- COMPARE REACTION -----
+  function checkReaction(actid) {
+
+    if (userCheckId.includes(currentUser)) {
+      deleteHeartReaction()
+    } else {
+      postHeartReaction(actid)
+    }
+
+  }
+
   return <main>
-    <p onClick={() => postHeartReaction()}>❤️ {hearts}</p>
+    <p onClick={() => checkReaction(act.id)}>❤️ {hearts}</p>
 
     {/* <p>🙌{whoops}</p>
     <p>🤩{starryeyes}</p> */}
   </main>
 
 }
+

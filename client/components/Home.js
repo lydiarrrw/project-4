@@ -6,12 +6,16 @@ import Reactions from '../components/reactions'
 function Home() {
   const [acts, updateActs] = useState([])
   const [time, updateTime] = useState(new Date())
+  const [actClicked, updateActClicked] = useState({})
+  const [modal, showModal] = useState(false)
+
 
   // Fetch the acts data from our API
   useEffect(() => {
     axios.get('api/acts')
       .then(resp => updateActs(resp.data))
   }, [])
+
 
   // Guard ensuring the data has arrived
   if (acts.length === 0) {
@@ -37,6 +41,7 @@ function Home() {
     return newAct
   })
 
+
   function getLiveArtists() {
     const filteredActs = mappedActs.filter(act => act.set_time <= time)
     const liveArtists = []
@@ -55,15 +60,24 @@ function Home() {
     return nextArtists
   }
 
+  function findClickedAct(actID) {
+    const act = acts.find(act => act.id === actID)
+    updateActClicked(act)
+  }
+
 
 
   return <main>
     {/* reaction functionality  */}
     <Reactions />
 
-
-    <h1 className="title has-text-centered">Welcome To Dreamland</h1>
-
+    {/* Title */}
+    <section className="hero is-medium">
+      <div className="hero-body">
+        <h1 className="title has-text-centered is-4">Welcome To Dreamland</h1>
+      </div>
+    </section>
+    {/* View Line Up */}
     <section className="hero is-medium" id="hero-home">
       <div className="hero-body">
         <Link to="/lineup">
@@ -71,8 +85,7 @@ function Home() {
         </Link>
       </div>
     </section>
-
-
+    {/* Food & Drinks */}
     <section className="hero is-medium" id="food-drinks-home">
       <div className="hero-body">
         <Link to="/menu">
@@ -80,91 +93,117 @@ function Home() {
         </Link>
       </div>
     </section>
-
-
-    <section className="hero is-medium">
+    {/* Space */}
+    <section className="hero is-small">
+      <div className="hero-body">
+      </div>
+    </section>
+    {/* Live Now */}
+    <section className="hero is-small">
       <div className="hero-body">
         <p className="title is-5">Live Now</p>
       </div>
     </section>
-
-    <section className="hero is-medium">
+    {/* List of lives */}
+    {getLiveArtists().includes(undefined) ?
+      <section
+        className="hero is-medium"
+        style={{
+          background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://i.imgur.com/7DAAlzJ.jpg)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
+        }}>
+        <div className="hero-body">
+          <p className="title is-5 has-text-white">Performances start from 12.00</p>
+        </div>
+      </section>
+      : getLiveArtists().map(artist => {
+        return <section
+          key={artist.id}
+          className="hero is-medium"
+          style={{
+            background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${artist.image})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover'
+          }}
+          onClick={() => {
+            findClickedAct(artist.id)
+            showModal(!modal)
+          }}>
+          <div className="hero-body">
+            <p className="title is-5 has-text-white">{artist.stage_name} Stage</p>
+            <p className="subtitle is-6 has-text-white">{artist.artist_name}</p>
+          </div>
+        </section>
+      })}
+    {/* Space */}
+    <section className="hero is-small">
       <div className="hero-body">
-        <p className="title is-5">Live Now</p>
       </div>
     </section>
-
-
-
-
-
-    <section className="hero is-medium">
+    {/* Up Next */}
+    <section className="hero is-small">
       <div className="hero-body">
         <p className="title is-5">Up Next</p>
-        {getNextArtists().includes(undefined) ?
-          'The last artists are currently on stage'
-          : getNextArtists().map(artist => {
-            return <p key={artist.id}>
-              {artist.artist_name}
-            </p>
-          })}
       </div>
     </section>
-
-
-
-
-
-    <div className="columns is-mobile is-centered">
-      <div className="column is-full">
-
-        <h3>Up Next</h3>
-        {getNextArtists().includes(undefined) ?
-          'The last artists are currently on stage'
-          : getNextArtists().map(artist => {
-            return <div key={artist.id}>
-              {artist.artist_name}
-            </div>
-          })}
-
+    {/* Up Next List */}
+    {getNextArtists().includes(undefined) ?
+      <section
+        className="hero is-medium"
+        style={{
+          background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(https://i.imgur.com/7DAAlzJ.jpg)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover'
+        }}
+      >
+        <div className="hero-body">
+          <p className="title is-5 has-text-white">No more performances for today</p>
+        </div>
+      </section>
+      : getNextArtists().map(artist => {
+        return <section
+          key={artist.id}
+          className="hero is-medium"
+          style={{
+            background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${artist.image})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover'
+          }}
+          onClick={() => {
+            findClickedAct(artist.id)
+            showModal(!modal)
+          }}>
+          <div className="hero-body">
+            <p className="title is-5 has-text-white">{artist.stage_name} Stage</p>
+            <p className="subtitle is-6 has-text-white">{artist.artist_name}</p>
+          </div>
+        </section>
+      })}
+    {/* Modal */}
+    <div className={`modal ${modal ? 'is-active' : ''}`}>
+      <div className="modal-background"></div>
+      <div className="modal-card">
+        <header className="modal-card-head">
+          <p className="modal-card-title">{actClicked.artist_name}</p>
+          <button className="delete" aria-label="close" onClick={() => showModal(!modal)}></button>
+        </header>
+        <section className="modal-card-body">
+          <section>
+            <img src={actClicked.image} />
+            <section>
+              <p>Set time : {actClicked.set_time}</p>
+              <p>Stage name : {actClicked.stage_name}</p>
+            </section>
+            <br />
+            <p>{actClicked.bio}</p>
+          </section>
+        </section>
+        <footer className="modal-card-foot">
+          <a href={actClicked.official_website} target="_blank" rel="noreferrer" className="button is-rounded is-success">More artist information</a>
+        </footer>
       </div>
     </div>
-
-
-    <h2 className="subtitle has-text-centered">Live Now</h2>
-    <section className="columns is-mobile is-centered">
-      <div className="column is-one-third has-background-link has-text-centered">
-        <h3>Diamond Stage</h3>
-        {getLiveArtists().includes(undefined) ?
-          'First artists will be on stage from 12:00'
-          : getLiveArtists().filter(artist => artist.stage_name === 'Diamond').map(artist => {
-            return <div key={artist.id}>
-              {artist.artist_name}
-            </div>
-          })}
-      </div>
-      <div className="column is-one-third has-background-danger has-text-centered">
-        <h3>Fairground Stage</h3>
-        {getLiveArtists().includes(undefined) ?
-          'First artists will be on stage from 12:00'
-          : getLiveArtists().filter(artist => artist.stage_name === 'Fairground').map(artist => {
-            return <div key={artist.id}>
-              {artist.artist_name}
-            </div>
-          })}
-      </div>
-      <div className="column is-one-third has-background-warning has-text-centered">
-        <h3>Lion Ring</h3>
-        {getLiveArtists().includes(undefined) ?
-          'First artists will be on stage from 12:00'
-          : getLiveArtists().filter(artist => artist.stage_name === 'Lion Ring').map(artist => {
-            return <div key={artist.id}>
-              {artist.artist_name}
-            </div>
-          })}
-      </div>
-    </section>
-
   </main >
 }
 

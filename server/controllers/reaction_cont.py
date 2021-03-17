@@ -20,6 +20,12 @@ def get_reactions():
     #     return {"message": "No one has reacted to this act"}, 404
     return reaction_schema.jsonify(reactions, many=True), 200
     
+# # # -----GET SINGLE REACTIONS------
+
+@router.route("/reactions/<int:reaction_id>", methods=["GET"])
+def get_single_reaction(reaction_id):
+    reactions = Reaction.query.get(reaction_id)
+    return reaction_schema.jsonify(reactions), 200
 
 
 # -----POST ACT REACTIONS------
