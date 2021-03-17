@@ -124,7 +124,7 @@ export default function Menu() {
     </div>
     <section className="columns card is-flex is-justify-content-space-between">
       <label className="column is-one-third is-mobile-size-4">Collection point</label>
-      <select className="column is-one-third is-mobile-size-4" onChange={(event) => getActId(event.target)} >
+      <select className="column is-one-third is-mobile-size-4 select" onChange={(event) => getActId(event.target)} >
         {acts.map(act => {
           return <option key={act.id} value={act.id}>{act.artist_name}: {act.set_time}</option>
         })}
@@ -139,22 +139,22 @@ export default function Menu() {
       <div className="modal-background"></div>
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Basket</p>
+          <p className="modal-card-title has-text-centered has-text-weight-bold">Basket</p>
           <button className="delete" aria-label="close" onClick={() => showModal(!modal)}></button>
         </header>
         <section className="modal-card-body">
           <div className="columns is-mobile is-vcentered is-centered">
-            <div className="column is-one-third">Items</div>
-            <div className="column is-one-third">Qty</div>
-            <div className="column is-one-third">Price</div>
+            <div className="column is-one-third has-text-weight-bold">Items</div>
+            <div className="column is-one-third has-text-weight-bold">Qty</div>
+            <div className="column is-one-third has-text-weight-bold">Price</div>
           </div>
           {basket.map(product => {
             return <div key={product.product_name}>
-              <div className="columns is-mobile is-vcentered is-centered">
+              <div className="columns is-mobile is-vcentered is-centered p-2">
                 <img className="image is-one-quarter is-64x64" src={product.image} />
-                <div className="column is-one-quarter has-text-centered">{product.product_name}</div>
+                <div className="column is-one-quarter has-text-weight-bold">{product.product_name}</div>
                 <div className="column is-one-quarter has-text-centered">1</div>
-                <div className="column is-one-quarter has-text-centered">{`£${product.price}`}</div>
+                <div className="column is-one-quarter has-text-centered">{`£${product.price.toFixed(2)}`}</div>
               </div>
             </div>
           })}
@@ -167,7 +167,7 @@ export default function Menu() {
         <footer className="modal-card-foot">
           {<Link
             to={'/profile'}>
-            <button onClick={() => submitUserOrder(token, actID, products)} className="button is-rounded is-primary">Submit order</button>
+            <button onClick={() => submitUserOrder(token, actID, products)} id="modalButton" className="button is-rounded has-text-light">Submit order</button>
           </Link>}
         </footer>
       </div>
