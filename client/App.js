@@ -2,20 +2,17 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './styles/style.scss'
 import NavBar from './components/navBar'
-import Home from './components/Home'
+import Home from './components/home'
 import LoginPage from './components/login'
 import Register from './components/register'
 import LineUp from './components/LineUp'
 import AdminDashboard from './components/adminDashboard'
 import Profile from './components/userProfile'
 import Menu from './components/Menu'
-
-
 import 'bulma'
 import './styles/style.scss'
 
-// ! Some starter code for your frontend, change this
-// ! however you like.
+
 const App = () => (
   <BrowserRouter>
     <NavBar />

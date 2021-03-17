@@ -57,8 +57,8 @@ export default function Reactions() {
   // const starryeyes = emojis.filter(getStarryEyes).length
 
   //---- make reaction ----
-  async function postHeartReaction() {
-
+  async function postHeartReaction(event) {
+    event.stopPropagation()
     try {
       await axios.post('/api/reactions/3', heartsReaction, {
         headers: { Authorization: `Bearer ${token}` }
@@ -108,11 +108,34 @@ export default function Reactions() {
   }
 
 
-  return <main>
-    <p onClick={() => postHeartReaction()}>❤️ {hearts}</p>
+  return <div className="columns is-mobile is-centred is-vcentered">
+    <div className="column is-narrow">
+      <div className="columns is-mobile is-centred is-vcentered is-variable is-2">
+        <div className="column">
 
-    {/* <p>🙌{whoops}</p>
-    <p>🤩{starryeyes}</p> */}
-  </main>
 
+          <div className="columns is-mobile is-centred is-vcentered is-variable is-2">
+            <div className="column is half" onClick={(event) => postHeartReaction(event)}>❤️</div>
+            <div className="column is half" onClick={(event) => postHeartReaction(event)}>❤️</div>
+          </div>
+
+
+
+          <span className="has-text-white has-text-centered" onClick={(event) => postHeartReaction(event)}>❤️<span className="pl-3">{hearts}</span></span>
+        </div>
+        <div className="column">
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}><span className="has-text-white">🔥 {hearts}</span></p>
+        </div>
+        <div className="column">
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}><span className="has-text-white">🙌 {hearts}</span></p>
+        </div>
+        <div className="column">
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}><span className="has-text-white">🎉 {hearts}</span></p>
+        </div>
+        <div className="column">
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}><span className="has-text-white">🤩 {hearts}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
 }
