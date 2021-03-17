@@ -9,10 +9,6 @@ body {
 button .is-danger {
   background-color: $danger;
 }
-.stages { 
-  background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-  // height: 600px;
-}
 
 .newnav {
   display: flex;
@@ -77,7 +73,6 @@ label {
   padding-bottom: 20px;
 }
 
-
 .state .p-success {
   width:100px
 }
@@ -88,6 +83,17 @@ label {
   background-size: cover;
 }
 
+.modal-card-head{
+  background: linear-gradient(90deg, #efd5ff 0%, #515ada 100%);
+}
+#modalButton{
+  background:  #515ada;
+}
+#stage{
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/Zh2pbwL.jpg');
+  background-position: center;
+  background-size: cover;
+}
 .collection {
   display: flex;
   justify-content: center;
