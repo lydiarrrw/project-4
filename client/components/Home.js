@@ -72,15 +72,15 @@ function Home() {
 
 
 
-  return <main>
+  return <main className="home-back">
     {/* reaction functionality  */}
 
     {/* Title */}
-    <section className="hero is-medium">
+    {/* <section className="hero is-medium">
       <div className="hero-body">
         <h1 className="title has-text-centered is-4">Welcome To Dreamland</h1>
       </div>
-    </section>
+    </section> */}
     {/* View Line Up */}
     <section className="hero is-medium" id="hero-home">
       <div className="hero-body">
@@ -104,8 +104,9 @@ function Home() {
     </section>
     {/* Live Now */}
     <section className="hero is-small">
-      <div className="hero-body">
-        <p className="title is-5">Live Now</p>
+      <div className="hero-body glow-subtitle">
+        Live now
+        {/* <p className="title is-5">Live now</p> */}
       </div>
     </section>
     {/* List of lives */}
@@ -148,8 +149,9 @@ function Home() {
     </section>
     {/* Up Next */}
     <section className="hero is-small">
-      <div className="hero-body">
-        <p className="title is-5">Up Next</p>
+      <div className="hero-body glow-subtitle">
+        Up next
+        {/* <p className="title is-5">Up Next</p> */}
       </div>
     </section>
     {/* Up Next List */}
