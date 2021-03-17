@@ -8,7 +8,7 @@ router = Blueprint(__name__, "acts")
 
 @router.route("/acts", methods=["GET"])
 def get_full_lineup():
-    acts = Act.query.all()
+    acts = Act.query.order_by(Act.set_time).all()
     return act_schema.jsonify(acts, many=True), 200
 
 @router.route("/acts/<int:act_id>/", methods=["GET"])

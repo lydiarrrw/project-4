@@ -42,7 +42,6 @@ export default function Reactions({ match }) {
   // ------- GET EMOJIS -----
   const reaction = act.reactions
 
-  console.log(reaction)
 
 
   const emojis = reaction.map(item => {

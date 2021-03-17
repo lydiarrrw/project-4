@@ -126,21 +126,20 @@ export default function AdminDashboard() {
       {filterByStage().map(order => {
         return <div key={order.id} className="box">
           {/* Order title ------------ */}
-          <div className="columns is-mobile is-vcentered is-centered">
+          <div className={orderReady(order) ? 'columns is-mobile is-vcentered is-centered orderProcess' : 'columns is-mobile is-vcentered is-centered orderToProcess'}>
+          
             <div className="column is-one-third">
               {/* <div className={orderReady(order) ? 'ready title is-4' : 'notready'}> */}
-              <h6 className="title is-5 has-text-centered has-text-link">Order #{order.id}</h6>
+              <h6 className="title is-5 has-text-centered">Order #{order.id}</h6>
               {/* </div> */}
             </div>
           </div>
           {/* Order buttons ------------ */}
-          <div>
+          <div className="collection">
             <p className={orderReady(order) ? 'ready title is-4' : 'notready'}>Ready for collection</p>
+            {/* <p className={orderReady(order) ? 'notready' : 'ready title is-4' }>Processing</p> */}
           </div>
-          <div className="orderStatus">
-            <button onClick={(event) => handleDelete(order.id)} className="button is-danger">Order collected?</button>
-            <button className={orderReady(order) ? 'notready button is-danger' : 'ready'} type="button" onClick={(event) => handleStatus(order.id)}>Ready to collect?</button>
-          </div>
+
           {/* Order Details Headers ------------ */}
           <div className="columns is-mobile is-vcentered is-centered">
             <div className="column is-one-third has-text-centered"><strong>Items</strong></div>
@@ -163,7 +162,10 @@ export default function AdminDashboard() {
             <div className="column is-one-third has-text-centered"></div>
             <div className="column is-one-third has-text-centered has-text-weight-bold">{`£${order.products.reduce((total, product) => total + product.price, 0).toFixed(2)}`}</div>
           </div>
-   
+          <div className="orderStatus">
+            <button onClick={(event) => handleDelete(order.id)} className={orderReady(order) ? 'ready button  is-warning' : 'notready'}>Collected?</button>
+            <button className={orderReady(order) ? 'notready' : 'ready button  is-primary'} type="button" onClick={(event) => handleStatus(order.id)}>Ready to collect?</button>
+          </div>
         </div>
       })}
 

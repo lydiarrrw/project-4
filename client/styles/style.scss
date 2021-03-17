@@ -1,6 +1,7 @@
 @import "../../node_modules/bulma/bulma.sass";
 @import '~pretty-checkbox/src/pretty-checkbox.scss';
 
+
 button .is-danger {
   background-color: $warning;
 }
@@ -10,12 +11,15 @@ button .is-danger {
 }
 
 .newnav {
-  margin: 7px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background-color: #f7f8fa;
 }
 
+.nav-color {
+  background-color:  #f7f8fa;
+}
 .dlheader{
   font-family: 'Pacifico', cursive;
   font-size: 40px;
@@ -27,6 +31,7 @@ button .is-danger {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background-color: #f7f8fa;
 }
 
 a .navimg {
@@ -51,10 +56,11 @@ label {
 }
 
 #hero-home{
-  background-image: url('https://static.billboard.com/files/media/Greatest-festival-performances-of-all-time-billboard-fea-1500-compressed.jpg');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/Me0DXFE.jpg');
   background-position: center;
   background-size: cover;
 }
+
 
 .notready {
   visibility: hidden;
@@ -64,9 +70,42 @@ label {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding-bottom: 20px;
 }
 
 
 .state .p-success {
   width:100px
 }
+
+#food-drinks-home{
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/Zh2pbwL.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
+.collection {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.profilelogo{
+  height: 50px;
+}
+
+.navitem {
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.orderProcess {
+  // background-color: #66ff99;
+  background-color: $primary;
+}
+
+.orderToProcess {
+  // background-color: #ff99cc;
+  background-color:$danger;
+}
+
