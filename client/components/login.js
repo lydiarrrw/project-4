@@ -6,7 +6,7 @@ export default function LoginPage({ history }) {
     email: '',
     password: ''
   })
-
+  const [error, updateError] = useState('')
  
   function handleChange(event) {
     const { name, value } = event.target
@@ -25,6 +25,11 @@ export default function LoginPage({ history }) {
       history.push('/')
     } catch (err) {
       console.log(err.response.data)
+      if (formData.email === '' || formData.password === '') {
+        updateError('All fields are required!')
+      } else {
+        updateError('')
+      }
     }
   }
 
@@ -56,6 +61,9 @@ export default function LoginPage({ history }) {
             <br />
             <div className="loginbutton">
               <button className="submitForm">Login</button>
+            </div>
+            <div className="alignerror">
+              <small>{error}</small>
             </div>
           </form>
         </div>

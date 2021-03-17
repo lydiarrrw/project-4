@@ -26,9 +26,6 @@ const NavBar = ({ history }) => {
     showMenu(!menu)
   }
 
-  // console.log(user.is_admin)
-
-
   function handleLogout() {
     localStorage.removeItem('token') // ! This logs you out.
     history.push('/lineup')
@@ -39,11 +36,7 @@ const NavBar = ({ history }) => {
     showMenu(false)
   }
 
-  // console.log(localStorage)
-
-
-  // const loggedIn = getLoggedInUserId()
-
+  
   let nav
 
   if (menu) {

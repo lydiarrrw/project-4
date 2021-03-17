@@ -6,6 +6,7 @@ $primary: #1fc04a;
 $warning:rgb(241, 204, 40);
 
 $tabs-toggle-link-active-background-color: red;
+$navbar-dropdown-background-color: black;
 
 @import "../../node_modules/bulma/bulma.sass";
 
@@ -29,13 +30,19 @@ button .is-danger {
   background-color:  black;
 }
 
+
 .menu-list {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: #302929;
-  
+  padding-bottom: 10px;
+}
+
+.navitem:hover {
+  background-color: #fff !important;
+  color: #f038a1!important;
 }
 
 .navmen {
@@ -253,15 +260,16 @@ label {
   background-color: #302929;
 }
 
-// .lower-title {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: end;
-// }
-
 
 .tabs.is-toggle li.is-active a {
   background-color: #f038a1 !important;
   border-color: #f038a1 !important;
 }
 
+
+.alignerror {
+ color: #fff;
+ display: flex;
+ justify-content:center;
+ padding-top: 8px;
+}
