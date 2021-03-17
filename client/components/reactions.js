@@ -1,24 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { getLoggedInUserId } from '../lib/auth'
 
-export default function Reactions({ match }) {
+export default function Reactions() {
 
-// const id = match.params.actid
-
-  const currentUser = getLoggedInUserId()
   const [heartsReaction, updateHeartsReaction] = useState({
     reaction_type: '❤️'
   })
   const [act, updateAct] = useState([])
   const [reacted, updatedReacted] = useState(true)
-
-  // const [userData, updateUserData] = useState({})
   const token = localStorage.getItem('token')
 
-// `api/acts/${id}`
-  // ------- GET ACTS-----
+
   useEffect(() => {
     axios.get('api/acts/3', { headers: { Authorization: `Bearer ${token}` } })
       .then(resp => updateAct(resp.data))
@@ -28,7 +21,6 @@ export default function Reactions({ match }) {
     return <h1>loading</h1>
   }
 
-  // ------- REFRESH REACTIONS -----
   async function refreshReactions() {
     try {
       const { data } = await axios.get('api/acts/3', { headers: { Authorization: `Bearer ${token}` } })
@@ -37,11 +29,8 @@ export default function Reactions({ match }) {
       console.log(err)
     }
   }
-
-
   // ------- GET EMOJIS -----
   const reaction = act.reactions
-
 
 
   const emojis = reaction.map(item => {
@@ -67,11 +56,11 @@ export default function Reactions({ match }) {
   // const whoops = emojis.filter(getWhoops).length
   // const starryeyes = emojis.filter(getStarryEyes).length
 
-  //---- MAKE REACTION ----
-  async function postHeartReaction(actid) {
-
+  //---- make reaction ----
+  async function postHeartReaction(event) {
+    event.stopPropagation()
     try {
-      await axios.post(`/api/reactions/${actid}`, heartsReaction, {
+      await axios.post('/api/reactions/3', heartsReaction, {
         headers: { Authorization: `Bearer ${token}` }
       })
 
@@ -80,18 +69,33 @@ export default function Reactions({ match }) {
     }
     refreshReactions()
     updatedReacted(false)
-
+    checkReaction()
   }
 
-  // ----- DELETE REACTION -----
-  async function deleteHeartReaction(reactionid) {
-    await axios.delete(`/api/reactions/${reactionid}`, {
+  //---- make reaction ----
+  // async function updateHeartReaction() {
+
+  //   try {
+  //     await axios.put('/api/reactions/1', heartsReaction, {
+  //       headers: { Authorization: `Bearer ${token}` }
+  //     })
+
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  //   refreshReactions()
+  // }
+
+  // ----- delete reaction -----
+  async function deleteHeartReaction() {
+    await axios.delete('/api/reactions/1', {
       headers: { Authorization: `Bearer ${token}` }
 
     })
     refreshReactions()
   }
-  const userCheckId = reaction.map(item => {
+
+  const userCheck = reaction.map(item => {
     return item.user.id
   })
 
@@ -112,23 +116,47 @@ export default function Reactions({ match }) {
   //console.log(checking())
 
 
-  // ----- COMPARE REACTION -----
-  function checkReaction(actid) {
-
-    if (userCheckId.includes(currentUser)) {
-      deleteHeartReaction()
-    } else {
-      postHeartReaction(actid)
+  function checkReaction() {
+    if (userCheck.includes(4)) {
+      return console.log('hello')
     }
-
   }
 
-  return <main>
-    <p onClick={() => checkReaction(act.id)}>❤️ {hearts}</p>
 
-    {/* <p>🙌{whoops}</p>
-    <p>🤩{starryeyes}</p> */}
-  </main>
-
+  return <div className="columns is-mobile">
+    <div className="column">
+      <div className="columns is-mobile">
+        <div className="column">
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">❤️</span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
+        </div>
+        <div className="column">
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">🔥 </span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
+        </div>
+        <div className="column">
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">🙌 </span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
+        </div>
+        <div className="column">
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">🎉</span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
+        </div>
+        <div className="column">
+          <p className="has-text-centered" onClick={(event) => postHeartReaction(event)}>
+            <span className="has-text-white">🤩</span>
+            <span className="has-text-white is-size-7 pl-2">{hearts}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 }
-
