@@ -131,9 +131,11 @@ function Profile() {
         userData.orders.map(order => {
           return <div key={order.id} className="box">
             {/* Order title ------------ */}
+            <div className={(order.ready_to_collect === true) ? 'orderProcess' : 'ordernotready'}>
             <div className="columns is-mobile is-vcentered is-centered">
               <div className="column is-one-third"><h6 className="title is-6 has-text-centered has-text-link">Order #{order.id}</h6></div>
               <div className="column is-two-third"><h6 className="title is-6 has-text-centered has-text-link">Status: {order.ready_to_collect ? 'Ready to collect' : 'Processing'}</h6></div>
+            </div>
             </div>
             {/* Order Details Headers ------------ */}
             <div className="columns is-mobile is-vcentered is-centered">

@@ -83,14 +83,14 @@ export default function Menu() {
   
 
   return <main>
-    <div className="tabs is-toggle is-fullwidth mb-2">
+    <div className="tabs is-toggle is-fullwidth mb-2 menuOptions">
       <ul onClick={(event) => updateProductType(event.target.innerText)}>
-        <li className="" >
+        <li className={(productType === 'Food') ? 'is-warning is-active' : 'notactive'} >
           <a>
             <span className="is-mobile-size-4 has-text-weight-bold">Food</span>
           </a>
         </li>
-        <li>
+        <li className={(productType === 'Drinks') ? 'is-warning is-active' : 'notactive'} >
           <a>
             <span className="is-mobile-size-4 has-text-weight-bold">Drinks</span>
           </a>
@@ -151,7 +151,7 @@ export default function Menu() {
       </div>
     </section>
     <section className="card is-flex is-flex-direction-column p-3">
-      <button className="button is-rounded is-centered is-danger" onClick={() => displayBasket()}>Create Order</button>
+      <button id="modalButton" className="button is-rounded is-centered has-text-light" onClick={() => displayBasket()}>Create Order</button>
     </section>
     {/* <section className="card">
 

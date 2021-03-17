@@ -50,12 +50,12 @@ const NavBar = ({ history }) => {
     nav = <div>
       <ul className="menu-list">
         <li></li>
-        <li>{localStorage.getItem('token') && <p><Link onClick={hideNav} to="/lineup" className="navitem">Acts</Link></p>}</li>
-        <li>{localStorage.getItem('token') && <Link onClick={hideNav} to="/menu" className="navitem">Menu</Link>}</li>
-        <li>{(user.is_admin === true) && <Link onClick={hideNav} to="/admin" className="navitem">Admin</Link>}</li>
-        <li>{!localStorage.getItem('token') && <Link onClick={hideNav} to="/signup" className="navitem">Sign Up</Link>}</li>
-        <li>{!localStorage.getItem('token') && <Link onClick={hideNav} to="/login" className="navitem">Login</Link>}</li>
-        <li>{localStorage.getItem('token') && <a onClick={handleLogout} className="navitem"><strong>Logout</strong></a>}</li>
+        <li><Link onClick={hideNav} to="/lineup" className="navitem navmen">Line Up</Link></li>
+        <li>{localStorage.getItem('token') && <Link onClick={hideNav} to="/menu" className="navitem navmen">Menu</Link>}</li>
+        <li>{(user.is_admin === true) && <Link onClick={hideNav} to="/admin" className="navitem navmen">Admin</Link>}</li>
+        <li>{!localStorage.getItem('token') && <Link onClick={hideNav} to="/signup" className="navitem navmen">Sign Up</Link>}</li>
+        <li>{!localStorage.getItem('token') && <Link onClick={hideNav} to="/login" className="navitem navmen">Login</Link>}</li>
+        <li>{localStorage.getItem('token') && <a onClick={handleLogout} className="navitem navmen">Logout</a>}</li>
         <li></li>
       </ul>
     </div>
@@ -65,13 +65,11 @@ const NavBar = ({ history }) => {
     <div className="newnav">
 
       <a role="button" onClick={() => refreshNavBar()}>
-        <img src="https://i.imgur.com/m4LDivk.png" alt="navigation menu" className="navimg" ></img>
+        <img src="https://i.imgur.com/HrNYiZb.png" alt="navigation menu" className="navimg" ></img>
       </a>
-
-
-      <Link to={{ pathname: '/' }}><h1 className="dlheader">Dreamland</h1></Link>
-      <Link to={'/profile'} >
-        <img alt="go to profile" className="navimg" src="https://i.imgur.com/9kDNNQo.png"></img>
+      <Link to={{ pathname: '/' }}><h1 className="glow-nav">Dreamland</h1></Link>
+      <Link to={!localStorage.getItem('token') ? '/login' : '/profile'}>
+        <img alt="go to profile" className="navimg" src="https://i.imgur.com/5GW7BSv.png"></img>
       </Link>
     </div>
     <div>{nav}</div>

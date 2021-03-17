@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 export default function LoginPage({ history }) {
@@ -7,8 +7,7 @@ export default function LoginPage({ history }) {
     password: ''
   })
 
-  console.log(formData)
-
+ 
   function handleChange(event) {
     const { name, value } = event.target
     updateFormData({ ...formData, [name]: value })
@@ -29,12 +28,11 @@ export default function LoginPage({ history }) {
     }
   }
 
-  return <div className="body level">
+  return <div className="body level regformback">
     <section className="container level-item regform">
       <div className="columns is-half">
-        <div className="columns p-5">
+        <div className="columns p-5 ">
           <form onSubmit={handleSubmit}>
-            <h1 className="title is-2 has-text-danger">Login</h1>
             <div>
               <label>Email</label>
               <br />
@@ -56,8 +54,8 @@ export default function LoginPage({ history }) {
               />
             </div>
             <br />
-            <div>
-              <button className="button is-danger">Login!</button>
+            <div className="loginbutton">
+              <button className="submitForm">Login</button>
             </div>
           </form>
         </div>
