@@ -2,8 +2,12 @@
 @import '~pretty-checkbox/src/pretty-checkbox.scss';
 
 
+body {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
 button .is-danger {
-  background-color: $warning;
+  background-color: $danger;
 }
 
 .newnav {
@@ -111,3 +115,6 @@ label {
   background-color:$danger;
 }
 
+.regform {
+  padding-top: 30px;
+}

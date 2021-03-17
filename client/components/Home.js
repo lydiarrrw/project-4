@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import Reactions from '../components/reactions'
+import Reactions from './reactions'
 
 function Home() {
   const [acts, updateActs] = useState([])
@@ -27,6 +27,11 @@ function Home() {
     updateTime(new Date())
   }, 1000)
 
+  // For testing purpose
+  // const now = new Date()
+  // const time = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 0)
+
+  
   // Formatting the acts set time in time format for use in founctions below
   // And for render on the page
   const mappedActs = acts.map(act => {
@@ -69,7 +74,6 @@ function Home() {
 
   return <main>
     {/* reaction functionality  */}
-    <Reactions />
 
     {/* Title */}
     <section className="hero is-medium">
@@ -134,6 +138,7 @@ function Home() {
             <p className="title is-5 has-text-white">{artist.stage_name} Stage</p>
             <p className="subtitle is-6 has-text-white">{artist.artist_name}</p>
           </div>
+          <Reactions />
         </section>
       })}
     {/* Space */}
