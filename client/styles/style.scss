@@ -266,6 +266,21 @@ label {
   border-color: #f038a1 !important;
 }
 
+.tabs.is-toggle.is-fullwidth, .tabs.is-toggle.a {
+  background-color: #302929;
+  border-color: #302929 !important;
+  border-style: hidden !important;
+}
+
+.tabs.is-toggle a:hover{
+  background-color: #f038a1 !important;
+  color: white !important;
+}
+
+.tabs.is-toggle a {
+  border-color: #302929 !important;
+  color: #302929;
+}
 
 .alignerror {
  color: #fff;

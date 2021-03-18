@@ -83,7 +83,7 @@ export default function Menu() {
   
 
   return <main>
-    <div className="tabs is-toggle is-fullwidth mb-2 menuOptions">
+    <div className="tabs is-toggle is-fullwidth mb-0 menuOptions">
       <ul onClick={(event) => updateProductType(event.target.innerText)}>
         <li className={(productType === 'Food') ? 'is-warning is-active' : 'notactive'} >
           <a>
@@ -131,7 +131,7 @@ export default function Menu() {
               <h5 className="is-mobile-size-4 is-vcentered is-centered">£{product.price.toFixed(2)}</h5>
             </div>
             <div className="column">
-              <button onClick={(event) => addToProducts(product.id)} className="button is-primary is-vcentered is-centered">Add</button>
+              <button onClick={(event) => addToProducts(product.id)} className="button is-dark has-text-light is-vcentered is-centered">Add</button>
             </div>
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function Menu() {
     </div>
     <section className="card has-text-centered p-3">
       <div className="card-content p-4 is-centered">
-        <label className=" is-centered has-text-weight-bold is-mobile-size-4 p-4">Collection point</label>
+        <label className=" is-centered has-text-weight-bold is-mobile-size-4 has-text-dark p-4">Collection point</label>
         <div className="select is-rounded p-4">
           <select id="collectionSelect" className=" is-mobile-size-4" onChange={(event) => getActId(event.target)} >
             <option value="disabled selected">Choose your next location</option>
