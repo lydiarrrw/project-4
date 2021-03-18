@@ -30,7 +30,7 @@ export default function Register({ history }) {
       console.log(data)
       history.push('/login')
     } catch (err) {
-      console.log(err.response.data._message)
+      console.log(err.response.data.message)
       if (formData.username === '' || formData.email === '' || formData.password === '' || formData.password_confirmation === '') {
         updateError('All fields are required')
       } else {
