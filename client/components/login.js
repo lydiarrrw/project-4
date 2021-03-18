@@ -26,9 +26,9 @@ export default function LoginPage({ history }) {
     } catch (err) {
       console.log(err.response.data)
       if (formData.email === '' || formData.password === '') {
-        updateError('All fields are required!')
+        updateError('All fields are required')
       } else {
-        updateError('')
+        updateError('Login details incorrect')
       }
     }
   }

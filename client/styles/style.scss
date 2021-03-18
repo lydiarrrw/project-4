@@ -101,10 +101,16 @@ label {
 .modal-card-head{
   background-image: linear-gradient(to right, #b9d1eb, #aec4f9, #b9b1ff, #d698f8, #f876de);
 }
+
+#stage{
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  background-position: center;
+  background-size: cover;
+}
+
 #modalButton {
   background: #f038a1;
 }
-
 
 .collection {
   display: flex;
@@ -287,4 +293,8 @@ label {
  display: flex;
  justify-content:center;
  padding-top: 8px;
+}
+
+.footerLink {
+  color: #f038a1;
 }
