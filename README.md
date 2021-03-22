@@ -31,6 +31,7 @@ You can see the deployed version here: [dreamlandlw.heroku.com](https://dreamlan
 * React
 * React-Router
 * Webpack
+* axios
 
 ### Backend:
 
@@ -41,14 +42,12 @@ You can see the deployed version here: [dreamlandlw.heroku.com](https://dreamlan
 
 * pytest
 
-### External Libraries:
-* axios
 
 ### Other
 * Github
 * Git
 * Heroku
-* bcrypt
+
 
 
 
