@@ -36,6 +36,7 @@ You can see the deployed version here: [dreamlandlw.heroku.com](https://dreamlan
 ### Backend:
 
 * Python
+* Flask
 * PostgreSQL
 
 ### Testing:
