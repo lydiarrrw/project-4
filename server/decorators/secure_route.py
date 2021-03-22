@@ -13,7 +13,7 @@ def secure_route(route_function):
         token_with_bearer = request.headers.get("Authorization")
 
         if not token_with_bearer:
-            return {"message": "Unvalid token"}, 401
+            return {"message": "Invalid token"}, 401
 
         token = token_with_bearer.replace("Bearer ","")
 
