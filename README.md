@@ -61,7 +61,7 @@ We decided to build a site which is designed to be used at a festival, that shou
 
 * Build their personal line up.
 * Order food and drinks to a location based on which act they were seeing.
-* Mark orders as rady to collect, and collected (admin rights).
+* Mark orders as ready to collect, and collected (admin rights).
 
 For this reason we chose a mobile first approach as, whilst the site works on a larger device, it's unlikely users would be accessing using these at the festival.
 
