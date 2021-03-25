@@ -7,7 +7,7 @@ This was a one week project, working in a team of three to build and deploy a fu
 
 You can see the deployed version here: [dreamlandlw.heroku.com](http://dreamlandlw.herokuapp.com/profile)
 
-*Note: It's slow to load in Google Chrome, but it's worth the wait!*
+*Note: It can be a bit slow to load as it's hosted for free on Heroku. This means that it will 'sleep' when there's no web traffic for 30mins. There can then be a short delay after it 'wakes up'. *
 
 ![](./dreamland.png)
 
