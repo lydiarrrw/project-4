@@ -36,6 +36,7 @@ You can see the deployed version here: [dreamlandlw.heroku.com](http://dreamland
 ### Backend:
 
 * Python
+* Flask
 * PostgreSQL
 
 ### Testing:
@@ -46,7 +47,7 @@ You can see the deployed version here: [dreamlandlw.heroku.com](http://dreamland
 * Github
 * Git
 * Heroku
-* bcrypt
+
 
 
 
