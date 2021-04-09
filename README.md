@@ -165,6 +165,11 @@ def test_login():
 * Improve the tabs on the admin/order and food/drink pages - currently theres an issue that you can't see there is another tab.
 * Improve sign up/login journey for users - when a user clicks the profile icon, it takes then to the login page. I'd like to add a link to sign in from there as they would have to click the nav bar otherwise.
 
+## Learnings
+* Plan, plan, plan! We did a lot of planning before we started any coding for this project and it was very helpful for the structure of the backend of the site, given all the relationships we had in our database.
+* Heroku has to 'wake up', as explained in the first section of my README.
+* This project also really helped me understand how to set the variables in Bulma and how to use the rules of specificity in styling pages.
+
 ## Accessibility
 There are lot's of things I need to check for this, but some of the most obvious ones I need to amend are:
 
